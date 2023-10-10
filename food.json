@@ -1,0 +1,158 @@
+{
+    "meals":[
+        {
+            "dish": {
+                "en": "Pork Tenderloin Plank Steak",
+                "swe": "Fläskfiléplanka"
+             },
+            "price": "149 kr",
+            "category": "pork",
+            "gluten": false,
+            "lactose": true,
+            "description": {
+                "en": "Duchesse potatoes, a redwine reduction, béarnaise and fried vegetables",
+                "swe": "Duchesse mos, rödvinssky, bearnaise och stekta grönsaker"
+            }
+        },
+        {
+            "dish": {
+                "en": "Biff Rydberg",
+                "swe": "Biff Rydberg"
+             },
+            "price": "175 kr",
+            "category": "meat",
+            "gluten": false,
+            "lactose": true,
+            "description": {
+                "en": "Diced beef tenderloin, potatoes and onion, served with dijonmustard and raw egg yolk",
+                "swe": "Tärnad oxfilé, potatis och gullök, serveras med dijonsenapskräm och rå äggula"
+            }
+        },
+        {
+            "dish": {
+                "en": "Spicy Cheeseburger",
+                "swe": "Spicy Cheeseburger"
+             },
+            "price": "155 kr",
+            "category": "meat",
+            "gluten": true,
+            "lactose": true,
+            "description": {
+                "en": "180gram prime rib burger with lettuce, tomato, pickled red onion, cheddar cheese with jalapeños and barbecue sauce in brioche bread with fries and smokey ranch-aioli",
+                "swe": "180gram högrevsburgare med sallad, tomat, picklad rödlök, cheddarost med jalapeños och barbecuesås i briochebröd med pommes och rökig ranch-aioli"
+            }
+        },
+        {
+            "dish": {
+                "en": "Halloumi Burger",
+                "swe": "Halloumi Burgare"
+             },
+            "price": "155 kr",
+            "category": "vego",
+            "gluten": true,
+            "lactose": true,
+            "description": {
+                "en": "Lettuce, tomato, red onion and guacamole in brioche bread with fries and aioli",
+                "swe": "Sallad, tomat, rödlök och guacamole i briochebröd med pommes och aioli"
+            }
+        },
+        {
+            "dish": {
+                "en": "Fish'n Chips",
+                "swe": "Fish'n Chips"
+             },
+            "price": "149 kr",
+            "category": "fish",
+            "gluten": false,
+            "lactose": true,
+            "description": {
+                "en": "\"Beer-batter\" breaded cod loins with dill-aioli, seared lemon and fries",
+                "swe": "\"Beer-batter\" panerad torskrygg med dill-aioli, halstrad citron och pommes"
+            }
+        },
+        {
+            "dish": {
+                "en": "Schnitzel",
+                "swe": "Husets Scnitzel"
+             },
+            "price": "175 kr",
+            "category": "meat",
+            "gluten": false,
+            "lactose": false,
+            "description": {
+                "en": "200 grams of meat \"Borås biggest\" served with lemon, capers, anchovy, herb butter and a redwine reduction with fried potatoes",
+                "swe": "200 gram välbankad schnitzel \"Borås största\" med citron, kapris, anjovis, kryddsmör och rödvinssky serveras med stekt potatis"
+            }
+        },
+        {
+            "dish": {
+                "en": "Ceasar salad",
+                "swe": "Ceasarsallad"
+             },
+            "price": "139 kr",
+            "category": "chicken",
+            "gluten": false,
+            "lactose": false,
+            "description": {
+                "en": "Grilled chicken, bacon, croutons, parmesan and caesardressing",
+                "swe": "Varm kyckling, bacon, krutonger, parmesan samt caesardressing"
+            }
+        },
+        {
+            "dish": {
+                "en": "Salomonsallad with quinoa",
+                "swe": "Laxsallad med quinoa"
+             },
+            "price": "159 kr",
+            "category": "fish",
+            "gluten": false,
+            "lactose": false,
+            "description": {
+                "en": "Grilled salomon with quinoa, cocktail tomatoes, julianne carrot, mixed salad, red onion with vinegrette",
+                "swe": "Grillad lax med quinoa, cocktailtomater, blandsallad, morot julienne, rödlök med vinägrett"
+            }
+        },
+        {
+            "dish": {
+                "en": "Creamy chickenpasta",
+                "swe": "Kräming kycklingpasta"
+             },
+            "price": "169 kr",
+            "category": "chicken",
+            "gluten": false,
+            "lactose": false,
+            "description": {
+                "en": "Sundried tomatoes, basil, vegetables and parmesan",
+                "swe": "Soltorkade tomater, basilika, grönsaker och parmesan"
+            }
+        },
+        {
+            "dish": {
+                "en": "Mussles ál cava",
+                "swe": "Musslor ál cava"
+             },
+            "price": "189 kr",
+            "category": "fish",
+            "gluten": false,
+            "lactose": true,
+            "description": {
+                "en": "Steamed mussles in a creamy cava sauce, topped with cream fraiche and jalapeños, served with fries and aioli",
+                "swe": "Ångkokta musslor i en krämig sås gjord på cava, toppas med cream fraiche och jalapeños, serveras med pommes och aioli"
+            }
+        },
+        {
+            "dish": {
+                "en": "Grilled beef tenderloin",
+                "swe": "Grillad oxfile"
+             },
+            "price": "259 kr",
+            "category": "meat",
+            "gluten": false,
+            "lactose": true,
+            "description": {
+                "en": "200 gram beef tenderloin, redwine reduction, fried vegetables and potato gratin (possible with fries and bearnaise)",
+                "swe": "200 gram oxfile, rödvinssås, frästa grönsaker serveras med potatisgratäng (går att få med pommes och bearnaise)"
+            }
+        }
+    ]
+}
