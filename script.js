@@ -1,21 +1,24 @@
-
-/*Jag skapade en funktion som fetchar alla måltider som finns i menyn och returnar
-en array med alla måltider. Sen kallar jag på den nedanför här. Kolla i consolen och se
-hur outputen vi får ser ut. Har även lagt in det i en try/catch, så om det skulle 
-uppstå ett fel när vi fetchar våran json fil eller när vi kör våran response.json()
-så kommer den direkt hoppa till catch och visa upp ett felmeddelande istället
-för att fortsätta*/
-
-async function getMeals() {
+/*Denna funktionen hämtar datan i våran json fil och
+returnar hela arrayen. Jag har även lagt det i try/catch
+block eftersom om det skulle ske ett fel när man läser datan
+så kommer vi direkt hoppa till catch där vi skriver ut felmeddelandet
+och kör inte klart hela try blocket om det blir fel*/
+async function getFoodData() {
     try {
         const response = await fetch("./food.json");
         const data = await response.json();
-        console.log(data.meals);
-        return data.meals
+        return data;
     } catch (error) {
-        console.log("There has been an error");
+        console.log("Det har hänt något fel!");
         console.log(error);
     }
-};
+}
+/*Här sparar vi våran data i en variabel. Vi kan använda await utanför
+en async funktion eftersom vi har lagt till type:"module" i våran
+script tag i html. Detta gör så att den väntar innan den fått ett
+svar från våran funktion innan den körs. 
 
-getMeals();
+Om vi vill använda datan är det bara att manipulera foodData som är en
+array*/
+const foodData = await getFoodData();
+
