@@ -1,0 +1,101 @@
+body {
+  background-color: #d4cccc;
+}
+/* Box of the aside menu */
+.aside-menu-container {
+  /* Does not work, think its because there no more element than this aside container
+  position: -webkit-sticky; Safari 
+  position: sticky;
+   */
+
+  /*Needed to set as absolut since no elements beside this container*/
+  /*some things needs to be changed after merging with other objects*/
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 0 20px;
+  min-height: 77dvh;
+  min-width: 20rem;
+  margin-top: 1rem;
+  background-color: #fff;
+}
+
+/*The reset filter text */
+#reset-filter {
+  font-size: 25px;
+  padding: 10px 0px;
+  margin-left: 2rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  width: 190px;
+}
+/* Hover over reset filter text */
+#reset-filter:hover {
+  color: rgba(184, 170, 149, 0.983);
+  text-shadow: 2px 2px 4px rgba(7, 7, 7, 0.3);
+  transition: 0.2s ease-in-out;
+}
+/* The roll down menu for filtering the price */
+#price-filter {
+  margin-left: 2rem;
+  font-size: 15px;
+  padding: 10px 30px;
+  border-radius: 8px;
+  text-align-last: center;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  background-color: rgba(184, 170, 149, 0.5);
+  box-shadow: 2px 2px 5px;
+  border: none;
+  outline: none;
+}
+/* container of the categories */
+.category-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* container for the checkboxes */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/*Designing the checkboxes  */
+.checkboxes {
+  height: 18px;
+  width: 18px;
+  margin-right: 0.5rem;
+  margin-left: 2rem;
+  filter: sepia(1);
+}
+/*Designing the labels  */
+.labels {
+  font-size: 18px;
+  padding: 5px 5px 5px 5px;
+  letter-spacing: 2px;
+}
+/* Allergic section container */
+.allergic-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+/* The titles of the aside container(kategorier, allergiers */
+.aside-container-title {
+  font-size: 20px;
+  padding: 10px 10px 10px;
+  margin-left: 1.4rem;
+  letter-spacing: 2px;
+  text-decoration: underline;
+}
+/* media mx with, 1000, 800, 600 */
+@media (max-width: 1000px) {
+}
+@media (max-width: 800px) {
+}
+@media (max-width: 600px) {
+}
