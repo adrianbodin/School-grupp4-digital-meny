@@ -22,3 +22,5 @@ Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
 
+console.log(foodData)
+
