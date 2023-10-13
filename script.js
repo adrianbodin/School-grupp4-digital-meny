@@ -69,6 +69,7 @@ document.getElementById("byta").addEventListener("click",() =>{
     document.getElementById("label_gluten").textContent = langData["eng"].gluten;
     document.getElementById("label_lactose").textContent = langData["eng"].lactose;
 
+    document.getElementById("byta").textContent = "Change to Swedish";
     document.querySelector("aside").classList.remove("swe");
     document.querySelector("aside").classList.add("eng");
 
@@ -91,6 +92,7 @@ document.getElementById("byta").addEventListener("click",() =>{
     document.getElementById("label_gluten").textContent = langData["swe"].gluten;
     document.getElementById("label_lactose").textContent = langData["swe"].lactose;
 
+    document.getElementById("byta").textContent = "Byt till Engelska";
     document.querySelector("aside").classList.remove("eng");
     document.querySelector("aside").classList.add("swe");
   }

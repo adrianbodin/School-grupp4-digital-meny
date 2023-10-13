@@ -131,11 +131,15 @@ body{
     transition: .2s;
 }
 .hej{
-    height: 2000px;
+  height: 2000px;
 }
 #byta{
-    position: relative;
-    padding-left: 1000px;
+    position: inherit;
+    right: 0;
+    margin: 2rem;
+    width: 200px;
+    height: 50px;
+    
 }
 
 /* media mx with, 1000, 800, 600 */
