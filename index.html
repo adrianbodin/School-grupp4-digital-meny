@@ -21,6 +21,8 @@
     <title>Document</title>
 </head>
 <body>
+
+  
     <header id="header">
         
         <div id="head_container">
@@ -28,15 +30,17 @@
             <h1 id="meny">Meny</h1>
         </div>
     </header>
-    <div class="hej"></div>
-    
+    <div class="hej">
+      <button id="byta">Click Me</button>
+    </div>
+
       <!-- The aside html container -->
-    <aside class="aside-menu-container">
+    <aside class="aside-menu-container swe">
       <!-- The reset filter text -->
       <p id="reset-filter">Återställ filter</p>
       <!-- The drop down menu for filtering after price -->
       <select name="filter-price" id="price-filter">
-        <option class="options" disabled selected>Pris</option>
+        <option class="options" disabled selected id="price">Pris</option>
         <!-- low to high option -->
         <option class="options" id="low-to-high" value="low">
           Lägst till högst
@@ -47,13 +51,14 @@
         </option>
       </select>
       <!-- The start of category box -->
-      <h2 class="aside-container-title">Kategorier</h2>
+      <h2 class="aside-container-title" id="category">Kategorier</h2>
       <div class="category-container">
         <div class="checkbox-container">
           <!-- Checkbox -->
           <input type="checkbox" class="checkboxes" id="vego" /><label
             class="labels"
             for="checkbox"
+            id="label_vego"
             >Vegetariskt</label
           >
         </div>
@@ -62,6 +67,7 @@
           <input type="checkbox" class="checkboxes" id="chicken" /><label
             class="labels"
             for="checkbox"
+            id="label_chicken"
             >Kyckling</label
           >
         </div>
@@ -70,6 +76,7 @@
           <input type="checkbox" class="checkboxes" id="pork" /><label
             class="labels"
             for="checkbox"
+            id="label_pork"
             >Fläsk</label
           >
         </div>
@@ -78,6 +85,7 @@
           <input type="checkbox" class="checkboxes" id="meat" /><label
             class="labels"
             for="checkbox"
+            id="label_beef"
             >Nöt</label
           >
         </div>
@@ -86,18 +94,20 @@
           <input type="checkbox" class="checkboxes" id="fish" /><label
             class="labels"
             for="checkbox"
+            id="label_fish"
             >Fisk</label
           >
         </div>
       </div>
       <!-- The start of the allergic container -->
       <div class="allergic-container">
-        <h2 class="aside-container-title">Allergier</h2>
+        <h2 class="aside-container-title" id="allergy_id">Allergier</h2>
         <div class="checkbox-container">
           <!-- Checkbox -->
           <input type="checkbox" class="checkboxes" id="gluten" /><label
             class="labels"
             for="checkbox"
+            id="label_gluten"
             >Glutenfritt</label
           >
         </div>
@@ -106,6 +116,7 @@
           <input type="checkbox" class="checkboxes" id="lactose" /><label
             class="labels"
             for="checkbox"
+            id="label_lactose"
             >Laktosfritt</label
           >
         </div>

@@ -97,6 +97,7 @@ body{
     background: #d4cccc;
     margin: 0;
 }
+
 #header{
     display: flex;
     align-items: center;
@@ -132,6 +133,11 @@ body{
 .hej{
     height: 2000px;
 }
+#byta{
+    position: relative;
+    padding-left: 1000px;
+}
+
 /* media mx with, 1000, 800, 600 */
 @media (max-width: 1000px) {
 }
