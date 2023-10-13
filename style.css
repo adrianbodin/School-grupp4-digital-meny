@@ -1,6 +1,5 @@
-body {
-  background-color: #d4cccc;
-}
+
+
 /* Box of the aside menu */
 .aside-menu-container {
   /* Does not work, think its because there no more element than this aside container
@@ -92,6 +91,46 @@ body {
   letter-spacing: 2px;
   text-decoration: underline;
 }
+
+
+body{
+    background: #d4cccc;
+    margin: 0;
+}
+#header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+#head_container{
+    width: 100%;
+    position: fixed;
+    background: #ebe3e3;
+    padding: 18rem;
+    box-shadow: 0 4px 2px -2px gray;
+    transition: .2s;
+}
+#logo{
+    border-radius: 50%;
+    box-shadow: 5px 5px 25px rgb(100, 89, 89);
+    border: 12px solid rgb(100, 89, 89);
+    mix-blend-mode: color-burn;
+    position: fixed;
+    top: 1.5rem;
+    left: 5rem;
+    transition: .2s;
+}
+#meny{
+    font-size: 8rem;
+    position: fixed;
+    left: 50%;
+    top: 1rem;
+    transition: .2s;
+}
+.hej{
+    height: 2000px;
+}
 /* media mx with, 1000, 800, 600 */
 @media (max-width: 1000px) {
 }
@@ -99,3 +138,4 @@ body {
 }
 @media (max-width: 600px) {
 }
+
