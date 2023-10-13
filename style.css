@@ -110,6 +110,7 @@ body{
     padding: 18rem;
     box-shadow: 0 4px 2px -2px gray;
     transition: .2s;
+    font-family: 'Smooch', cursive;
 }
 #logo{
     border-radius: 50%;
