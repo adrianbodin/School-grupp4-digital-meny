@@ -22,5 +22,23 @@ Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
 
+//Javascript för att minska headern --Johan
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction(){
+    
+    if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50){
+        document.getElementById("meny").style.fontSize ="4rem";
+        document.getElementById("logo").style.width ="110px";
+        document.getElementById("head_container").style.padding ="11rem";
+    }
+    else{
+        document.getElementById("meny").style.fontSize ="8rem";
+        document.getElementById("logo").style.width ="225px";
+        document.getElementById("head_container").style.padding ="18rem";
+    }
+}
+
 console.log(foodData)
 
+ main
