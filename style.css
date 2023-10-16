@@ -192,44 +192,82 @@
   box-shadow: 5px 5px 3px black;
 }
 
-body {
-  background: #d4cccc;
-  margin: 0;
+body{
+    background: #d4cccc;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
-#header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+#header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
 }
-#head_container {
-  z-index: 1000;
-  width: 100%;
-  position: fixed;
-  background: rgb(235, 227, 227);
-  padding: 18rem;
-  box-shadow: 0 4px 2px -2px gray;
-  transition: 0.2s;
+#head_container{
+    width: 100%;
+    position: fixed;
+    background: #ebe3e3;
+    padding: 18rem;
+    box-shadow: 0 4px 2px -2px gray;
+    transition: .2s;
+    font-family: 'Smooch', cursive;
 }
-#logo {
-  border-radius: 50%;
-  box-shadow: 5px 5px 25px rgb(100, 89, 89);
-  border: 12px solid rgb(100, 89, 89);
-  mix-blend-mode: color-burn;
-  position: fixed;
-  top: 1.5rem;
-  left: 5rem;
-  transition: 0.2s;
+#logo{
+    border-radius: 50%;
+    box-shadow: 5px 5px 25px rgb(100, 89, 89);
+    border: 12px solid rgb(100, 89, 89);
+    mix-blend-mode: color-burn;
+    position: fixed;
+    top: 1.5rem;
+    left: 5rem;
+    transition: .2s;
 }
-#meny {
-  font-size: 8rem;
-  position: fixed;
-  left: 50%;
-  top: 1rem;
-  transition: 0.2s;
+#meny{
+    font-size: 8rem;
+    position: fixed;
+    left: 50%;
+    top: 1rem;
+    transition: .2s;
 }
-.hej {
+.hej{
   height: 2000px;
 }
+#byta{
+    position: inherit;
+    right: 0;
+    margin: 2rem;
+    width: 200px;
+    height: 50px;
+    
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: black 2px solid;
+  padding: 3rem;
+  font-weight: 700;
+
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  text-align: center;
+  padding-right: 2rem;
+}
+
+.social-div {
+  text-align: center;
+}
+
+.footer-logo {
+  border-radius: 100%;
+}
+
 /* media mx with, 1000, 800, 600 */
 @media (max-height: 600px) {
   .aside-menu-container {
@@ -258,6 +296,7 @@ body {
   }
 }
 @media (max-width: 1000px) {
+
   .aside-menu-container {
     display: none;
   }
@@ -267,8 +306,20 @@ body {
     align-items: center;
     flex-direction: column;
   }
+
+  .footer-logo {
+    display: none;
+  }
+
 }
 @media (max-width: 800px) {
+  footer {
+    padding: 2rem;
+  }
 }
 @media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    padding: 1rem;
+  }
 }

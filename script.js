@@ -63,7 +63,89 @@ function scrollFunction() {
   }
 }
 
-console.log(foodData);
+//Byta språk
+document.getElementById("byta").addEventListener("click",() =>{
+  document.getElementById("byta").innerHTML = foodData[0].dish.en;
+
+  if(document.querySelector("aside").classList.contains("swe")){
+    /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
+    document.getElementById("reset-filter").textContent = langData["eng"].title;
+    document.getElementById("low-to-high").textContent = langData["eng"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["eng"].high_to_low;
+    document.getElementById("price").textContent = langData["eng"].price;
+
+    document.getElementById("category").textContent = langData["eng"].category;
+    document.getElementById("label_vego").innerHTML = langData["eng"].vego;
+    document.getElementById("label_chicken").textContent = langData["eng"].chicken;
+
+    document.getElementById("label_pork").textContent = langData["eng"].pork;
+    document.getElementById("label_beef").textContent = langData["eng"].meat;
+    document.getElementById("label_fish").textContent = langData["eng"].fish;
+
+    document.getElementById("allergy_id").innerHTML = langData["eng"].allergy;
+    document.getElementById("label_gluten").textContent = langData["eng"].gluten;
+    document.getElementById("label_lactose").textContent = langData["eng"].lactose;
+
+    document.getElementById("byta").textContent = "Change to Swedish";
+    document.querySelector("aside").classList.remove("swe");
+    document.querySelector("aside").classList.add("eng");
+
+  }else if(document.querySelector("aside").classList.contains("eng")){
+
+    document.getElementById("reset-filter").textContent = langData["swe"].title;
+    document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
+    document.getElementById("price").textContent = langData["swe"].price;
+
+    document.getElementById("category").textContent = langData["swe"].category;
+    document.getElementById("label_vego").textContent = langData["swe"].vego;
+    document.getElementById("label_chicken").textContent = langData["swe"].chicken;
+
+    document.getElementById("label_pork").textContent = langData["swe"].pork;
+    document.getElementById("label_beef").textContent = langData["swe"].meat;
+    document.getElementById("label_fish").textContent = langData["swe"].fish;
+
+    document.getElementById("allergy_id").textContent = langData["swe"].allergy;
+    document.getElementById("label_gluten").textContent = langData["swe"].gluten;
+    document.getElementById("label_lactose").textContent = langData["swe"].lactose;
+
+    document.getElementById("byta").textContent = "Byt till Engelska";
+    document.querySelector("aside").classList.remove("eng");
+    document.querySelector("aside").classList.add("swe");
+  }
+})
+const langData ={
+  "eng":{
+    "title": "Reset filter",
+    "low_to_high": "Low To High",
+    "high_to_low": "High to Low",
+    "price": "Price",
+    "category":"Category",
+    "vego": "Vegetarien",
+    "chicken" : "Chicken",
+    "pork": "Pork",
+    "meat": "Beef",
+    "fish": "Fish", 
+    "allergy": "Allergy",
+    "gluten": "Glutenfree",
+    "lactose": "Lactosfree"
+  },
+  "swe":{
+    "title": "Återställ filter",
+    "low_to_high": "Lågt till Högt",
+    "high_to_low": "Högt till lågt",
+    "price": "Pris",
+    "category": "Kategorier",
+    "vego": "Vegetariskt",
+    "chicken" : "Kyckling",
+    "pork": "Fläsk",
+    "meat": "Biff",
+    "fish": "Fisk",
+    "allergy": "Allergier",
+    "gluten": "Glutenfri",
+    "lactose": "Laktosfri"
+  }
+}
 
 const slider = document.querySelector(".carousel-wrapper");
 let isDown = false;
