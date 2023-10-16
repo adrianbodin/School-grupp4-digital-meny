@@ -1,22 +1,22 @@
-
-
 /* Box of the aside menu */
 .aside-menu-container {
-  /* Does not work, think its because there no more element than this aside container
-  position: -webkit-sticky; Safari 
-  position: sticky;
-   */
-
-  /*Needed to set as absolut since no elements beside this container*/
-  /*some things needs to be changed after merging with other objects*/
-  position: absolute;
+  position: fixed;
   left: 0;
+  top: 0;
   bottom: 0;
-  border-radius: 0 20px;
-  min-height: 77dvh;
-  min-width: 20rem;
-  margin-top: 1rem;
-  background-color: #fff;
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+  height: 100dvh;
+  width: 20rem;
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(255, 255, 255, 0.9) 11.2%,
+    rgba(255, 107, 161, 0.3) 99.1%
+  );
+  padding-top: 17rem;
+  padding-bottom: 2rem;
+  z-index: 999;
+  transition: 0.2s;
 }
 
 /*The reset filter text */
@@ -29,6 +29,7 @@
   cursor: pointer;
   margin-bottom: 2rem;
   width: 190px;
+  transition: 0.2s;
 }
 /* Hover over reset filter text */
 #reset-filter:hover {
@@ -39,7 +40,6 @@
 /* The roll down menu for filtering the price */
 #price-filter {
   margin-left: 2rem;
-  font-size: 15px;
   padding: 10px 30px;
   border-radius: 8px;
   text-align-last: center;
@@ -49,6 +49,7 @@
   box-shadow: 2px 2px 5px;
   border: none;
   outline: none;
+  transition: 0.2s;
 }
 /* container of the categories */
 .category-container {
@@ -81,7 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 /* The titles of the aside container(kategorier, allergiers */
 .aside-container-title {
@@ -90,52 +91,184 @@
   margin-left: 1.4rem;
   letter-spacing: 2px;
   text-decoration: underline;
+  transition: 0.2s;
+}
+.version-aside-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  padding-top: 20rem;
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(255, 255, 255, 0.9) 11.2%,
+    rgba(255, 107, 161, 0.3) 99.1%
+  );
+  width: 100%;
+  height: 200px;
+  transition: 0.2s;
+}
+.witdh {
+  width: 700px;
 }
 
+.carousel-wrapper {
+  display: flex;
 
-body{
-    background: #d4cccc;
-    margin: 0;
+  width: 100%;
+  overflow-x: auto;
+  transform: scale(0.98);
+  scroll-snap-type: x mandatory;
+
+  margin-left: 2rem;
+  margin-right: 25rem;
+  overflow: hidden;
+  text-align: center;
+  transition: 0.5s;
 }
-#header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
+.item {
+  min-width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+  text-decoration: none;
+  margin-bottom: 2rem;
 }
-#head_container{
-    width: 100%;
-    position: fixed;
-    background: #ebe3e3;
-    padding: 18rem;
-    box-shadow: 0 4px 2px -2px gray;
-    transition: .2s;
+
+.carousel-wrapper:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  opacity: 0.6;
+  transform: scale(1);
 }
-#logo{
-    border-radius: 50%;
-    box-shadow: 5px 5px 25px rgb(100, 89, 89);
-    border: 12px solid rgb(100, 89, 89);
-    mix-blend-mode: color-burn;
-    position: fixed;
-    top: 1.5rem;
-    left: 5rem;
-    transition: .2s;
+
+.carousel-wrapper::-webkit-scrollbar {
+  width: 0.5em;
 }
-#meny{
-    font-size: 8rem;
-    position: fixed;
-    left: 50%;
-    top: 1rem;
-    transition: .2s;
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+  background-color: #888;
 }
-.hej{
-    height: 2000px;
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.price-filter-two {
+  padding: 10px 15px !important;
+  margin-bottom: 32px !important;
+}
+#allergic-drop-down {
+  margin-left: 2rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align-last: center;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  background-color: rgba(184, 170, 149, 0.5);
+  box-shadow: 2px 2px 5px;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+}
+#reset-button {
+  margin-left: 2rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align-last: center;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  background-color: rgba(184, 170, 149, 0.5);
+  box-shadow: 2px 2px 5px;
+  border: none;
+  outline: none;
+}
+#reset-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #d4cccc;
+  box-shadow: inset 2px 2px 5px gray;
+}
+#reset-button:active {
+  box-shadow: 5px 5px 3px black;
+}
+
+body {
+  background: #d4cccc;
+  margin: 0;
+}
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#head_container {
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  background: rgb(235, 227, 227);
+  padding: 18rem;
+  box-shadow: 0 4px 2px -2px gray;
+  transition: 0.2s;
+}
+#logo {
+  border-radius: 50%;
+  box-shadow: 5px 5px 25px rgb(100, 89, 89);
+  border: 12px solid rgb(100, 89, 89);
+  mix-blend-mode: color-burn;
+  position: fixed;
+  top: 1.5rem;
+  left: 5rem;
+  transition: 0.2s;
+}
+#meny {
+  font-size: 8rem;
+  position: fixed;
+  left: 50%;
+  top: 1rem;
+  transition: 0.2s;
+}
+.hej {
+  height: 2000px;
 }
 /* media mx with, 1000, 800, 600 */
+@media (max-height: 600px) {
+  .aside-menu-container {
+    display: none;
+  }
+  .version-aside-container {
+    display: block;
+  }
+}
+@media (max-height: 800px) {
+  #reset-filter {
+    margin-bottom: 1rem;
+  }
+  #price-filter {
+    margin-bottom: 1rem;
+  }
+  .allergic-container {
+    gap: 5px;
+  }
+  .category-container {
+    gap: 5px;
+  }
+  .aside-container-title {
+    padding: 0;
+    font-size: 15px;
+  }
+}
 @media (max-width: 1000px) {
+  .aside-menu-container {
+    display: none;
+  }
+  .version-aside-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 @media (max-width: 800px) {
 }
 @media (max-width: 600px) {
 }
-
