@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&family=Smooch&display=swap" rel="stylesheet">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rye&family=Smooch&display=swap"
+      rel="stylesheet"
+    />
     <!--
         Font för vanlig text:
         font-family: 'Roboto', sans-serif;
@@ -15,10 +18,11 @@
         Font för meny loggan:
         font-family: 'Smooch', cursive;
     -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
+
 </head>
 <body>
 
@@ -38,11 +42,14 @@
     </div>
       <!-- The aside html container -->
     <aside class="aside-menu-container swe">
+
       <!-- The reset filter text -->
       <p id="reset-filter">Återställ filter</p>
       <!-- The drop down menu for filtering after price -->
       <select name="filter-price" id="price-filter">
+
         <option class="options" disabled selected id="price">Pris</option>
+
         <!-- low to high option -->
         <option class="options" id="low-to-high" value="low">
           Lägst till högst
@@ -124,6 +131,43 @@
         </div>
       </div>
       <!-- The end of aside box -->
+    </aside>
+
+    <aside class="version-aside-container">
+      <div class="witdh">
+        <div class="carousel-wrapper">
+          <div class="item" id="vego-caro">Vegetariskt</div>
+          <div class="item"><a href="" id="chicken-caro">Kyckling</a></div>
+          <div class="item" id="pork-caro"><a href="">Fläsk</a></div>
+          <div class="item" id="meat-caro"><a href="">Nöt</a></div>
+          <div class="item" id="fish-caro"><a href="">Fisk</a></div>
+        </div>
+      </div>
+      <div class="select-container">
+        <select name="filter-price" class="price-filter-two" id="price-filter">
+          <option class="options" disabled selected>Pris filter</option>
+          <!-- low to high option -->
+          <option class="options" id="low-to-high" value="low">
+            Lägst till högst
+          </option>
+          <!-- high to low option -->
+          <option class="options" id="high-to-low" value="high">
+            Högst till lägst
+          </option>
+        </select>
+        <select name="filter-price" id="allergic-drop-down">
+          <option class="options" disabled selected>Allergier</option>
+          <!-- low to high option -->
+          <option class="options" id="low-to-high" value="low">
+            Glutenfritt
+          </option>
+          <!-- high to low option -->
+          <option class="options" id="high-to-low" value="high">
+            Laktosfritt
+          </option>
+        </select>
+        <button id="reset-button">Återställ filter</button>
+      </div>
     </aside>
 
     <footer>
