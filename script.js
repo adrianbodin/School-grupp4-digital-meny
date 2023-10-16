@@ -46,6 +46,108 @@ function scrollFunction(){
     }
 }
 
-console.log(foodData)
+//funktion för att sortera matdatan efter pris --Alma
+function sortDishesByPrice(low) { 
+  foodData.sort((a,b) => { //sort metod på foodData array som sorterar elementen med en jämförelsefunktion
+    const priceA = parseFloat(a.price.replace(" kr", "")); 
+    const priceB = parseFloat(b.price.replace(" kr", ""));
+    
+    if(low) { //om low är sant, sorteras priset från lägre till högre
+      return priceA - priceB;
+    }else { // om low är falskt, sorteras priser från högre till lägre
+      return priceB - priceA;
+    }
+  });
+}
+
+const gridContainer = document.querySelector(".grid-container"); //hämtar html-element och lagrar i variabeln gridContainer
+
+async function createBoxes() {
+  const foodData = await getFoodData(); // Hämta matdata från JSON-filen
+
+  // Loopa igenom varje maträtt och skapa ett card för varje rätt
+  foodData.forEach((data) => {
+    const box = document.createElement("div"); //vit box
+    box.className = "white-card";
+
+    const img = document.createElement("img"); //bild
+    img.src = data.img;
+    box.appendChild(img);
+
+    const title = document.createElement("div"); //titel
+    title.className = "dish-title";
+    title.textContent = data.dish.swe;
+    box.appendChild(title);
+
+    const price = document.createElement("div"); //pris
+    price.className = "dish-price";
+    price.textContent = data.price;
+    box.appendChild(price);
+
+    const description = document.createElement("div"); //beskrivning
+    description.className = "dish-description";
+    description.textContent = data.description.swe;
+    box.appendChild(description);
+
+    gridContainer.appendChild(box); //elementen läggs till i gridContainer  
+  });
+}
+
+ function updateBoxes(data) { //funktion för att uppdatera boxarna av maträttsdata
+  while (gridContainer.firstChild) { 
+    gridContainer.removeChild(gridContainer.firstChild); //rensa bort tidigare maträttsboxar
+  }
+
+  data.forEach((item) => { 
+    const box = createDishBox(item); 
+    gridContainer.appendChild(box); 
+  });
+} 
+// Anropa funktionen för att skapa boxar när sidan laddas
+createBoxes();
+
+const priceFilterSelect = document.getElementById("price-filter");
+
+priceFilterSelect.addEventListener("change", () => { //lyssnar på ändring som användaren gör på sortera knapp
+  const selectOption = priceFilterSelect.value;
+
+  if(selectOption === "low") { //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
+    sortDishesByPrice(true);
+  }else if(selectOption === "high") {
+    sortDishesByPrice(false);
+  }
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild);
+  }
+
+  updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna 
+  });
+ 
+// Funktion för att skapa maträttsbox
+function createDishBox(data) {
+  const box = document.createElement("div");
+  box.className = "white-card";
+
+  const img = document.createElement("img");
+  img.src = data.img;
+  box.appendChild(img);
+
+  const title = document.createElement("div");
+  title.className = "dish-title";
+  title.textContent = data.dish.swe;
+  box.appendChild(title);
+
+  const price = document.createElement("div");
+  price.className = "dish-price";
+  price.textContent = data.price;
+  box.appendChild(price);
+
+  const description = document.createElement("div");
+  description.className = "dish-description";
+  description.textContent = data.description.swe;
+  box.appendChild(description);
+
+  return box;
+} 
 
 

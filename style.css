@@ -131,6 +131,48 @@ body{
 .hej{
     height: 2000px;
 }
+.card { /* card */
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 30%;
+}
+.white-card { /* card-box */
+  float: left;
+  width: 370px;
+  height: 350px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.white-card img { /* Bild */
+  height: 200px;
+  width: 370px;
+  border-radius: 4px 4px 0 0;
+}
+.dish-title { /* maträtt-namn */
+  font-size: 23px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 10px;
+}
+.dish-price { /* pris */
+  float: right;
+  padding: 4px;
+  font-size: 23px;
+  font-weight: bold;
+  margin: 10px;
+  
+}
+.dish-description { /* maträtt-beskrivning */
+  color: rgb(109, 109, 109);
+  padding: 0px;
+  margin: 10px;
+}
 /* media mx with, 1000, 800, 600 */
 @media (max-width: 1000px) {
 }
@@ -138,4 +180,3 @@ body{
 }
 @media (max-width: 600px) {
 }
-
