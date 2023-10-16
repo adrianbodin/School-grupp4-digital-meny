@@ -98,6 +98,7 @@ body{
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
+
 #header{
     display: flex;
     align-items: center;
@@ -111,6 +112,7 @@ body{
     padding: 18rem;
     box-shadow: 0 4px 2px -2px gray;
     transition: .2s;
+    font-family: 'Smooch', cursive;
 }
 #logo{
     border-radius: 50%;
@@ -130,7 +132,15 @@ body{
     transition: .2s;
 }
 .hej{
-    height: 2000px;
+  height: 2000px;
+}
+#byta{
+    position: inherit;
+    right: 0;
+    margin: 2rem;
+    width: 200px;
+    height: 50px;
+    
 }
 
 footer {
@@ -157,6 +167,7 @@ footer {
 .footer-logo {
   border-radius: 100%;
 }
+
 /* media mx with, 1000, 800, 600 */
 @media (max-width: 1000px) {
   .footer-logo {
