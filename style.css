@@ -192,56 +192,58 @@
   box-shadow: 5px 5px 3px black;
 }
 
-body{
-    background: #d4cccc;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
+body {
+  background: #d4cccc;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
-#header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-#head_container{
-    width: 100%;
-    position: fixed;
-    background: #ebe3e3;
-    padding: 18rem;
-    box-shadow: 0 4px 2px -2px gray;
-    transition: .2s;
-    font-family: 'Smooch', cursive;
+#head_container {
+  width: 100%;
+  position: fixed;
+  background: #ebe3e3;
+  padding: 18rem;
+  box-shadow: 0 4px 2px -2px gray;
+  transition: 0.2s;
+  font-family: "Smooch", cursive;
+  z-index: 1000;
 }
-#logo{
-    border-radius: 50%;
-    box-shadow: 5px 5px 25px rgb(100, 89, 89);
-    border: 12px solid rgb(100, 89, 89);
-    mix-blend-mode: color-burn;
-    position: fixed;
-    top: 1.5rem;
-    left: 5rem;
-    transition: .2s;
+#logo {
+  border-radius: 50%;
+  box-shadow: 5px 5px 25px rgb(100, 89, 89);
+  border: 12px solid rgb(100, 89, 89);
+  mix-blend-mode: color-burn;
+  position: fixed;
+  top: 1.5rem;
+  left: 5rem;
+  transition: 0.2s;
 }
-#meny{
-    font-size: 8rem;
-    position: fixed;
-    left: 50%;
-    top: 1rem;
-    transition: .2s;
+#meny {
+  font-size: 8rem;
+  position: fixed;
+  left: 50%;
+  top: 1rem;
+  transition: 0.2s;
 }
-.hej{
+.hej {
   height: 2000px;
 }
 
-.card { /* card */
+.card {
+  /* card */
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: 50%;
+  top: 25%;
   left: 30%;
 }
-.white-card { /* card-box */
+.white-card {
+  /* card-box */
   float: left;
   width: 370px;
   height: 350px;
@@ -252,38 +254,40 @@ body{
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.white-card img { /* Bild */
+.white-card img {
+  /* Bild */
   height: 200px;
   width: 370px;
   border-radius: 4px 4px 0 0;
 }
-.dish-title { /* maträtt-namn */
+.dish-title {
+  /* maträtt-namn */
   font-size: 23px;
   font-weight: bold;
   padding: 0px;
   margin: 10px;
 }
-.dish-price { /* pris */
+.dish-price {
+  /* pris */
   float: right;
   padding: 4px;
   font-size: 23px;
   font-weight: bold;
   margin: 10px;
-  
 }
-.dish-description { /* maträtt-beskrivning */
+.dish-description {
+  /* maträtt-beskrivning */
   color: rgb(109, 109, 109);
   padding: 0px;
   margin: 10px;
 }
 
-#byta{
-    position: inherit;
-    right: 0;
-    margin: 2rem;
-    width: 200px;
-    height: 50px;
-    
+#byta {
+  position: inherit;
+  right: 0;
+  margin: 2rem;
+  width: 200px;
+  height: 50px;
 }
 
 footer {
@@ -293,7 +297,11 @@ footer {
   border-top: black 2px solid;
   padding: 3rem;
   font-weight: 700;
-
+  background: #ebe3e3;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  z-index: 1000;
 }
 
 .social-list {
@@ -340,7 +348,6 @@ footer {
   }
 }
 @media (max-width: 1000px) {
-
   .aside-menu-container {
     display: none;
   }
@@ -354,7 +361,6 @@ footer {
   .footer-logo {
     display: none;
   }
-
 }
 @media (max-width: 800px) {
   footer {
