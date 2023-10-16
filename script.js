@@ -22,28 +22,45 @@ Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
 
-
 //simple function for reseting the filters, using simple location.reload when "clicked"(Daniel)
 const resetFilter = document.getElementById("reset-filter");
 resetFilter.addEventListener("click", () => {
   location.reload();
 });
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", () => {
+  location.reload();
+});
 
 //Javascript för att minska headern --Johan
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  scrollFunction();
+};
 
-function scrollFunction(){
-    
-    if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50){
-        document.getElementById("meny").style.fontSize ="4rem";
-        document.getElementById("logo").style.width ="110px";
-        document.getElementById("head_container").style.padding ="11rem";
-    }
-    else{
-        document.getElementById("meny").style.fontSize ="8rem";
-        document.getElementById("logo").style.width ="225px";
-        document.getElementById("head_container").style.padding ="18rem";
-    }
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("meny").style.fontSize = "4rem";
+    document.getElementById("logo").style.width = "110px";
+    document.getElementById("head_container").style.padding = "11rem";
+    document.getElementById("aside-menu").style.paddingTop = "11rem";
+    document.getElementById("aside-menu").style.width = "16rem";
+    document.getElementById("price-filter").style.fontSize = "15px";
+    document.getElementById("reset-filter").style.fontSize = "25px";
+    document.getElementById("reset-filter").style.width = "190px";
+    document.querySelector(".version-aside-container").style.paddingTop =
+      "12rem";
+  } else {
+    document.getElementById("meny").style.fontSize = "8rem";
+    document.getElementById("logo").style.width = "225px";
+    document.getElementById("head_container").style.padding = "18rem";
+    document.getElementById("aside-menu").style.paddingTop = "18rem";
+    document.getElementById("aside-menu").style.width = "20rem";
+    document.getElementById("price-filter").style.fontSize = "17px";
+    document.getElementById("reset-filter").style.fontSize = "27px";
+    document.getElementById("reset-filter").style.width = "300px";
+    document.querySelector(".version-aside-container").style.paddingTop =
+      "20rem";
+  }
 }
 
 //funktion för att sortera matdatan efter pris --Alma
@@ -150,4 +167,113 @@ function createDishBox(data) {
   return box;
 } 
 
+//Byta språk
+document.getElementById("byta").addEventListener("click",() =>{
+  document.getElementById("byta").innerHTML = foodData[0].dish.en;
 
+  if(document.querySelector("aside").classList.contains("swe")){
+    /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
+    document.getElementById("reset-filter").textContent = langData["eng"].title;
+    document.getElementById("low-to-high").textContent = langData["eng"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["eng"].high_to_low;
+    document.getElementById("price").textContent = langData["eng"].price;
+
+    document.getElementById("category").textContent = langData["eng"].category;
+    document.getElementById("label_vego").innerHTML = langData["eng"].vego;
+    document.getElementById("label_chicken").textContent = langData["eng"].chicken;
+
+    document.getElementById("label_pork").textContent = langData["eng"].pork;
+    document.getElementById("label_beef").textContent = langData["eng"].meat;
+    document.getElementById("label_fish").textContent = langData["eng"].fish;
+
+    document.getElementById("allergy_id").innerHTML = langData["eng"].allergy;
+    document.getElementById("label_gluten").textContent = langData["eng"].gluten;
+    document.getElementById("label_lactose").textContent = langData["eng"].lactose;
+
+    document.getElementById("byta").textContent = "Change to Swedish";
+    document.querySelector("aside").classList.remove("swe");
+    document.querySelector("aside").classList.add("eng");
+
+  }else if(document.querySelector("aside").classList.contains("eng")){
+
+    document.getElementById("reset-filter").textContent = langData["swe"].title;
+    document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
+    document.getElementById("price").textContent = langData["swe"].price;
+
+    document.getElementById("category").textContent = langData["swe"].category;
+    document.getElementById("label_vego").textContent = langData["swe"].vego;
+    document.getElementById("label_chicken").textContent = langData["swe"].chicken;
+
+    document.getElementById("label_pork").textContent = langData["swe"].pork;
+    document.getElementById("label_beef").textContent = langData["swe"].meat;
+    document.getElementById("label_fish").textContent = langData["swe"].fish;
+
+    document.getElementById("allergy_id").textContent = langData["swe"].allergy;
+    document.getElementById("label_gluten").textContent = langData["swe"].gluten;
+    document.getElementById("label_lactose").textContent = langData["swe"].lactose;
+
+    document.getElementById("byta").textContent = "Byt till Engelska";
+    document.querySelector("aside").classList.remove("eng");
+    document.querySelector("aside").classList.add("swe");
+  }
+})
+const langData ={
+  "eng":{
+    "title": "Reset filter",
+    "low_to_high": "Low To High",
+    "high_to_low": "High to Low",
+    "price": "Price",
+    "category":"Category",
+    "vego": "Vegetarien",
+    "chicken" : "Chicken",
+    "pork": "Pork",
+    "meat": "Beef",
+    "fish": "Fish", 
+    "allergy": "Allergy",
+    "gluten": "Glutenfree",
+    "lactose": "Lactosfree"
+  },
+  "swe":{
+    "title": "Återställ filter",
+    "low_to_high": "Lågt till Högt",
+    "high_to_low": "Högt till lågt",
+    "price": "Pris",
+    "category": "Kategorier",
+    "vego": "Vegetariskt",
+    "chicken" : "Kyckling",
+    "pork": "Fläsk",
+    "meat": "Biff",
+    "fish": "Fisk",
+    "allergy": "Allergier",
+    "gluten": "Glutenfri",
+    "lactose": "Laktosfri"
+  }
+}
+
+const slider = document.querySelector(".carousel-wrapper");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener("mousedown", (e) => {
+  isDown = true;
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  slider.classList.add("action");
+});
+slider.addEventListener("mouseleave", () => {
+  isDown = false;
+  slider.classList.remove("action");
+});
+slider.addEventListener("mouseup", () => {
+  isDown = false;
+  slider.classList.remove("action");
+});
+slider.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
