@@ -66,8 +66,8 @@
             },
         "price": "149 kr",
         "category": "fish",
-        "gluten": false,
-        "lactose": true,
+        "gluten": true,
+        "lactose": false,
         "description": {
             "en": "\"Beer-batter\" breaded cod loins with dill-aioli, seared lemon and fries",
             "swe": "\"Beer-batter\" panerad torskrygg med dill-aioli, halstrad citron och pommes"
