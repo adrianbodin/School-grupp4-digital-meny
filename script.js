@@ -25,7 +25,7 @@ const foodData = await getFoodData();
 //simple function for reseting the filters, using simple location.reload when "clicked"(Daniel)
 const resetFilter = document.getElementById("reset-filter");
 resetFilter.addEventListener("click", () => {
-  location.reload();
+  window.location.replace(window.location.href);
 });
 const resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", () => {
@@ -40,7 +40,8 @@ window.onscroll = function () {
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("meny").style.fontSize = "4rem";
-    document.getElementById("logo").style.width = "110px";
+    document.getElementById("logo").style.width = "120px";
+    document.getElementById("logo").style.top = "0.5rem";
     document.getElementById("head_container").style.padding = "11rem";
     document.querySelector(".aside-menu-container").style.paddingTop = "11rem";
     document.querySelector(".aside-menu-container").style.width = "16rem";
@@ -49,17 +50,26 @@ function scrollFunction() {
     document.getElementById("reset-filter").style.width = "190px";
     document.querySelector(".version-aside-container").style.paddingTop =
       "12rem";
+    document.querySelector(".footer-logo").style.height = "8rem";
+    document.querySelector(".footer-logo").style.width = "8rem";
+    document.querySelector(".footer").style.padding = "0.4rem";
+    document.querySelector(".footer").style.opacity = "0.4";
   } else {
-    document.getElementById("meny").style.fontSize = "8rem";
-    document.getElementById("logo").style.width = "225px";
-    document.getElementById("head_container").style.padding = "18rem";
-    document.querySelector(".aside-menu-container").style.paddingTop = "18rem";
+    document.getElementById("meny").style.fontSize = "7rem";
+    document.getElementById("logo").style.width = "180px";
+    document.getElementById("head_container").style.padding = "16rem";
+    document.querySelector(".aside-menu-container").style.paddingTop =
+      "15.5rem";
     document.querySelector(".aside-menu-container").style.width = "20rem";
     document.getElementById("price-filter").style.fontSize = "17px";
     document.getElementById("reset-filter").style.fontSize = "27px";
     document.getElementById("reset-filter").style.width = "300px";
     document.querySelector(".version-aside-container").style.paddingTop =
-      "20rem";
+      "17rem";
+    document.querySelector(".footer-logo").style.height = "10rem";
+    document.querySelector(".footer-logo").style.width = "10rem";
+    document.querySelector(".footer").style.padding = "1.2rem";
+    document.querySelector(".footer").style.opacity = "0.9";
   }
 }
 
@@ -264,30 +274,3 @@ const langData = {
     lactose: "Laktosfri",
   },
 };
-
-const slider = document.querySelector(".carousel-wrapper");
-let isDown = false;
-let startX;
-let scrollLeft;
-
-slider.addEventListener("mousedown", (e) => {
-  isDown = true;
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-  slider.classList.add("action");
-});
-slider.addEventListener("mouseleave", () => {
-  isDown = false;
-  slider.classList.remove("action");
-});
-slider.addEventListener("mouseup", () => {
-  isDown = false;
-  slider.classList.remove("action");
-});
-slider.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
