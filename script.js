@@ -25,7 +25,7 @@ const foodData = await getFoodData();
 //simple function for reseting the filters, using simple location.reload when "clicked"(Daniel)
 const resetFilter = document.getElementById("reset-filter");
 resetFilter.addEventListener("click", () => {
-  location.reload();
+  window.location.replace(window.location.href);
 });
 const resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", () => {
@@ -40,38 +40,51 @@ window.onscroll = function () {
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("meny").style.fontSize = "4rem";
-    document.getElementById("logo").style.width = "110px";
+    document.getElementById("logo").style.width = "120px";
+    document.getElementById("logo").style.top = "0.5rem";
     document.getElementById("head_container").style.padding = "11rem";
-    document.getElementById("aside-menu").style.paddingTop = "11rem";
-    document.getElementById("aside-menu").style.width = "16rem";
+    document.querySelector(".aside-menu-container").style.paddingTop = "11rem";
+    document.querySelector(".aside-menu-container").style.width = "16rem";
     document.getElementById("price-filter").style.fontSize = "15px";
     document.getElementById("reset-filter").style.fontSize = "25px";
     document.getElementById("reset-filter").style.width = "190px";
     document.querySelector(".version-aside-container").style.paddingTop =
       "12rem";
+    document.querySelector(".footer-logo").style.height = "8rem";
+    document.querySelector(".footer-logo").style.width = "8rem";
+    document.querySelector(".footer").style.padding = "0.4rem";
+    document.querySelector(".footer").style.opacity = "0.4";
   } else {
-    document.getElementById("meny").style.fontSize = "8rem";
-    document.getElementById("logo").style.width = "225px";
-    document.getElementById("head_container").style.padding = "18rem";
-    document.getElementById("aside-menu").style.paddingTop = "18rem";
-    document.getElementById("aside-menu").style.width = "20rem";
+    document.getElementById("meny").style.fontSize = "7rem";
+    document.getElementById("logo").style.width = "180px";
+    document.getElementById("head_container").style.padding = "16rem";
+    document.querySelector(".aside-menu-container").style.paddingTop =
+      "15.5rem";
+    document.querySelector(".aside-menu-container").style.width = "20rem";
     document.getElementById("price-filter").style.fontSize = "17px";
     document.getElementById("reset-filter").style.fontSize = "27px";
     document.getElementById("reset-filter").style.width = "300px";
     document.querySelector(".version-aside-container").style.paddingTop =
-      "20rem";
+      "17rem";
+    document.querySelector(".footer-logo").style.height = "10rem";
+    document.querySelector(".footer-logo").style.width = "10rem";
+    document.querySelector(".footer").style.padding = "1.2rem";
+    document.querySelector(".footer").style.opacity = "0.9";
   }
 }
 
 //funktion för att sortera matdatan efter pris --Alma
-function sortDishesByPrice(low) { 
-  foodData.sort((a,b) => { //sort metod på foodData array som sorterar elementen med en jämförelsefunktion
-    const priceA = parseFloat(a.price.replace(" kr", "")); 
+function sortDishesByPrice(low) {
+  foodData.sort((a, b) => {
+    //sort metod på foodData array som sorterar elementen med en jämförelsefunktion
+    const priceA = parseFloat(a.price.replace(" kr", ""));
     const priceB = parseFloat(b.price.replace(" kr", ""));
-    
-    if(low) { //om low är sant, sorteras priset från lägre till högre
+
+    if (low) {
+      //om low är sant, sorteras priset från lägre till högre
       return priceA - priceB;
-    }else { // om low är falskt, sorteras priser från högre till lägre
+    } else {
+      // om low är falskt, sorteras priser från högre till lägre
       return priceB - priceA;
     }
   });
@@ -121,6 +134,7 @@ async function createBoxes() {
     description.textContent = data.description.swe;
     box.appendChild(description);
 
+
     if(data.gluten === false) {
       const glutenFree = document.createElement("p");
       glutenFree.className = "gluten-free";
@@ -137,39 +151,43 @@ async function createBoxes() {
     
 
     gridContainer.appendChild(box); //elementen läggs till i gridContainer  
+
   });
 }
 
- function updateBoxes(data) { //funktion för att uppdatera boxarna av maträttsdata
-  while (gridContainer.firstChild) { 
+function updateBoxes(data) {
+  //funktion för att uppdatera boxarna av maträttsdata
+  while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild); //rensa bort tidigare maträttsboxar
   }
 
-  data.forEach((item) => { 
-    const box = createDishBox(item); 
-    gridContainer.appendChild(box); 
+  data.forEach((item) => {
+    const box = createDishBox(item);
+    gridContainer.appendChild(box);
   });
-} 
+}
 // Anropa funktionen för att skapa boxar när sidan laddas
 createBoxes();
 
 const priceFilterSelect = document.getElementById("price-filter");
 
-priceFilterSelect.addEventListener("change", () => { //lyssnar på ändring som användaren gör på sortera knapp
+priceFilterSelect.addEventListener("change", () => {
+  //lyssnar på ändring som användaren gör på sortera knapp
   const selectOption = priceFilterSelect.value;
 
-  if(selectOption === "low") { //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
+  if (selectOption === "low") {
+    //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
     sortDishesByPrice(true);
-  }else if(selectOption === "high") {
+  } else if (selectOption === "high") {
     sortDishesByPrice(false);
   }
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
   }
 
-  updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna 
-  });
- 
+  updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
+});
+
 // Funktion för att skapa maträttsbox
 function createDishBox(data) {
   const box = document.createElement("div");
@@ -196,118 +214,101 @@ function createDishBox(data) {
   box.appendChild(description);
 
   return box;
-} 
+}
 
 //Byta språk
-document.getElementById("byta").addEventListener("click",() =>{
+document.getElementById("byta").addEventListener("click", () => {
   document.getElementById("byta").innerHTML = foodData[0].dish.en;
 
-  if(document.querySelector("aside").classList.contains("swe")){
+  if (document.querySelector("aside").classList.contains("swe")) {
     /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
     document.getElementById("reset-filter").textContent = langData["eng"].title;
-    document.getElementById("low-to-high").textContent = langData["eng"].low_to_high;
-    document.getElementById("high-to-low").textContent = langData["eng"].high_to_low;
+    document.getElementById("low-to-high").textContent =
+      langData["eng"].low_to_high;
+    document.getElementById("high-to-low").textContent =
+      langData["eng"].high_to_low;
     document.getElementById("price").textContent = langData["eng"].price;
 
     document.getElementById("category").textContent = langData["eng"].category;
     document.getElementById("label_vego").innerHTML = langData["eng"].vego;
-    document.getElementById("label_chicken").textContent = langData["eng"].chicken;
+    document.getElementById("label_chicken").textContent =
+      langData["eng"].chicken;
 
     document.getElementById("label_pork").textContent = langData["eng"].pork;
     document.getElementById("label_beef").textContent = langData["eng"].meat;
     document.getElementById("label_fish").textContent = langData["eng"].fish;
 
     document.getElementById("allergy_id").innerHTML = langData["eng"].allergy;
-    document.getElementById("label_gluten").textContent = langData["eng"].gluten;
-    document.getElementById("label_lactose").textContent = langData["eng"].lactose;
+    document.getElementById("label_gluten").textContent =
+      langData["eng"].gluten;
+    document.getElementById("label_lactose").textContent =
+      langData["eng"].lactose;
 
     document.getElementById("byta").textContent = "Change to Swedish";
     document.querySelector("aside").classList.remove("swe");
     document.querySelector("aside").classList.add("eng");
-
-  }else if(document.querySelector("aside").classList.contains("eng")){
-
+  } else if (document.querySelector("aside").classList.contains("eng")) {
     document.getElementById("reset-filter").textContent = langData["swe"].title;
-    document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
-    document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
+    document.getElementById("low-to-high").textContent =
+      langData["swe"].low_to_high;
+    document.getElementById("high-to-low").textContent =
+      langData["swe"].high_to_low;
     document.getElementById("price").textContent = langData["swe"].price;
 
     document.getElementById("category").textContent = langData["swe"].category;
     document.getElementById("label_vego").textContent = langData["swe"].vego;
-    document.getElementById("label_chicken").textContent = langData["swe"].chicken;
+    document.getElementById("label_chicken").textContent =
+      langData["swe"].chicken;
 
     document.getElementById("label_pork").textContent = langData["swe"].pork;
     document.getElementById("label_beef").textContent = langData["swe"].meat;
     document.getElementById("label_fish").textContent = langData["swe"].fish;
 
     document.getElementById("allergy_id").textContent = langData["swe"].allergy;
-    document.getElementById("label_gluten").textContent = langData["swe"].gluten;
-    document.getElementById("label_lactose").textContent = langData["swe"].lactose;
+    document.getElementById("label_gluten").textContent =
+      langData["swe"].gluten;
+    document.getElementById("label_lactose").textContent =
+      langData["swe"].lactose;
 
     document.getElementById("byta").textContent = "Byt till Engelska";
     document.querySelector("aside").classList.remove("eng");
     document.querySelector("aside").classList.add("swe");
   }
-})
-const langData ={
-  "eng":{
-    "title": "Reset filter",
-    "low_to_high": "Low To High",
-    "high_to_low": "High to Low",
-    "price": "Price",
-    "category":"Category",
-    "vego": "Vegetarien",
-    "chicken" : "Chicken",
-    "pork": "Pork",
-    "meat": "Beef",
-    "fish": "Fish", 
-    "allergy": "Allergy",
-    "gluten": "Glutenfree",
-    "lactose": "Lactosfree"
+});
+
+const langData = {
+  eng: {
+    title: "Reset filter",
+    low_to_high: "Low To High",
+    high_to_low: "High to Low",
+    price: "Price",
+    category: "Category",
+    vego: "Vegetarien",
+    chicken: "Chicken",
+    pork: "Pork",
+    meat: "Beef",
+    fish: "Fish",
+    allergy: "Allergy",
+    gluten: "Glutenfree",
+    lactose: "Lactosfree",
   },
-  "swe":{
-    "title": "Återställ filter",
-    "low_to_high": "Lågt till Högt",
-    "high_to_low": "Högt till lågt",
-    "price": "Pris",
-    "category": "Kategorier",
-    "vego": "Vegetariskt",
-    "chicken" : "Kyckling",
-    "pork": "Fläsk",
-    "meat": "Biff",
-    "fish": "Fisk",
-    "allergy": "Allergier",
-    "gluten": "Glutenfri",
-    "lactose": "Laktosfri"
-  }
-}
+  swe: {
+    title: "Återställ filter",
+    low_to_high: "Lågt till Högt",
+    high_to_low: "Högt till lågt",
+    price: "Pris",
+    category: "Kategorier",
+    vego: "Vegetariskt",
+    chicken: "Kyckling",
+    pork: "Fläsk",
+    meat: "Biff",
+    fish: "Fisk",
+    allergy: "Allergier",
+    gluten: "Glutenfri",
+    lactose: "Laktosfri",
+  },
+};
 
-const slider = document.querySelector(".carousel-wrapper");
-let isDown = false;
-let startX;
-let scrollLeft;
-
-slider.addEventListener("mousedown", (e) => {
-  isDown = true;
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-  slider.classList.add("action");
-});
-slider.addEventListener("mouseleave", () => {
-  isDown = false;
-  slider.classList.remove("action");
-});
-slider.addEventListener("mouseup", () => {
-  isDown = false;
-  slider.classList.remove("action");
-});
-slider.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 2;
-  slider.scrollLeft = scrollLeft - walk;
-});
 
 
 //I denna arrayen sparas våra aktiva filter som vi valt
@@ -381,44 +382,4 @@ function displayFilteredMeals(filters) {
 
 
 
-    /*const foodCategory = foodData.filter((data) => {
-        if (data.category === toggle.target.id) {
-          return data
-        } 
-    });
-
-    if (toggle.target.checked) {
-      foodCategory.forEach((dish) => gridContainer.appendChild(createDishBox(dish)));
-    } */
-    
-
-    /*const allCards = document.querySelectorAll(".white-card");
-    let cardArray = Array.from(allCards)
-
-    const foodCategory = foodData.filter((data) => {
-      if (data.category === toggle.target.id) {
-        return data
-      } 
-  });
-
-    const results = cardArray.filter((dish) => dish.id === toggle.target.id + "-card");
-    console.log(results)
-    
-    cardArray.forEach((card) => {
-      if(card !== results) {
-        card.remove();
-      }
-    })
-
-    if(toggle.target.checked) {
-      foodCategory.forEach((dish) => {
-        gridContainer.appendChild(createDishBox(dish))
-      });
-      
-   } else {
-    results.forEach((dish) => {
-      dish.style.display = "flex";
-  });
-       
-  };*/
-
+ 
