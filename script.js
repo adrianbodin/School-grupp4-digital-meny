@@ -99,6 +99,21 @@ async function createBoxes() {
   foodData.forEach((data) => {
     const box = document.createElement("div"); //vit box
     box.className = "white-card";
+    
+    //Kollar om måltiden inehåller gluten och lägger isåfall
+    //till detta i id
+    if(data.gluten === false && data.lactose === false) {
+      box.id = "glutenfree" + "lactosefree" + data.category + "-card";
+    } 
+    else if (data.gluten === false) {
+      box.id = "glutenfree" + data.category + "-card";
+    }
+    else if (data.lactose === false) {
+      box.id = "lactosefree" + data.category + "-card";
+    } else {
+      box.id = data.category + "-card";
+    }
+    
 
     const img = document.createElement("img"); //bild
     img.src = data.img;
@@ -119,7 +134,24 @@ async function createBoxes() {
     description.textContent = data.description.swe;
     box.appendChild(description);
 
-    gridContainer.appendChild(box); //elementen läggs till i gridContainer
+
+    if(data.gluten === false) {
+      const glutenFree = document.createElement("p");
+      glutenFree.className = "gluten-free";
+      glutenFree.textContent = "Glutenfri";
+      box.appendChild(glutenFree);
+    }
+
+    if(data.lactose === false) {
+      const lactoseFree = document.createElement("p");
+      lactoseFree.className = "lactose-free";
+      lactoseFree.textContent = "Laktosfri";
+      box.appendChild(lactoseFree);
+    }
+    
+
+    gridContainer.appendChild(box); //elementen läggs till i gridContainer  
+
   });
 }
 
@@ -160,6 +192,7 @@ priceFilterSelect.addEventListener("change", () => {
 function createDishBox(data) {
   const box = document.createElement("div");
   box.className = "white-card";
+  box.id = data.category + "-card";
 
   const img = document.createElement("img");
   img.src = data.img;
@@ -242,6 +275,7 @@ document.getElementById("byta").addEventListener("click", () => {
     document.querySelector("aside").classList.add("swe");
   }
 });
+
 const langData = {
   eng: {
     title: "Reset filter",
@@ -274,3 +308,78 @@ const langData = {
     lactose: "Laktosfri",
   },
 };
+
+
+
+//I denna arrayen sparas våra aktiva filter som vi valt
+let activeFilters = [];
+
+//tar in alla checkboxes
+const allCheckboxes = document.querySelectorAll(".checkboxes");
+
+//Lägger en eventlistener för varje checkbox
+allCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener("change", (toggle) => {
+
+    //Denna if satsen kickar in om vi väljer att "kryssa i" filtret
+    if(toggle.target.checked){
+
+      //Lägger till id på checkboxen(samma som kategorierna)
+      activeFilters.push(toggle.target.id)
+      console.log(activeFilters)
+    } else {
+        /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
+        den tryckta boxens id och lägger till den i en ny 
+        array och byter sedan plats på den och den "vanliga"*/
+        let newArray = activeFilters.filter(arrayItem => {
+          return arrayItem !== toggle.target.id
+      });
+      activeFilters = newArray
+    }
+
+    /*Kör denna funktionen efter vi lagt till eller tagit bort
+    något ur våran array. Denna ska även skickas in en parameter
+    av en array som vi gör här med våra aktiva filter*/
+    displayFilteredMeals(activeFilters);
+    
+  });
+});
+
+//tar in en array av våra aktuella filter
+function displayFilteredMeals(filters) {
+
+  //Tar in alla våra divar med maträtterna
+  const mealDivs = document.querySelectorAll(".white-card");
+  
+  /*Kollar om våran aktiva filter array är tom, om den är det
+  så sätter vi display:flex på alla divar(gör den synliga)*/
+  if(filters.length === 0) {
+    mealDivs.forEach(meal => {
+    meal.style.display = "flex";
+  });} else {
+    mealDivs.forEach(div => {
+      /*Om den inte är tom loopar vi egenom alla divar och kollar
+      om något sparat filter stämmer med den aktuella diven och 
+      kommer tillbaka sann eller falskt beroende på  */
+      const matchesAtLeastOneFilter = filters.some(filter => div.id.includes(filter));
+      /*Om den är true(stämmer överens med minst ett filter) så
+      sätter vi den synlig(display:flex) annars sätter vi den 
+      osynlig(display:none)*/
+      if (matchesAtLeastOneFilter) {
+        div.style.display = "flex";
+      } else {
+        div.style.display = "none";
+      }
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+ 
