@@ -106,7 +106,63 @@ async function createBoxes() {
 
   // Loopa igenom varje maträtt och skapa ett card för varje rätt
   foodData.forEach((data) => {
-    const box = document.createElement("div"); //vit box
+    createDishBox(data);
+  });
+}
+
+function updateBoxes(data) {
+  //funktion för att uppdatera boxarna av maträttsdata
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild); //rensa bort tidigare maträttsboxar
+  }
+
+  data.forEach((item) => {
+    const box = createDishBox(item);
+    gridContainer.appendChild(box);
+  });
+}
+// Anropa funktionen för att skapa boxar när sidan laddas
+createBoxes();
+
+const priceFilterSelect = document.getElementById("price-filter");
+
+priceFilterSelect.addEventListener("change", () => {
+  //lyssnar på ändring som användaren gör på sortera knapp
+  const selectOption = priceFilterSelect.value;
+
+  if (selectOption === "low") {
+    //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
+    sortDishesByPrice(true);
+  } else if (selectOption === "high") {
+    sortDishesByPrice(false);
+  }
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild);
+  }
+
+  updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
+});
+
+// Skapade ett till price-filter för mobil versionen //Daniel
+const priceFilterSelectMobile = document.getElementById("price-filter-mobile");
+priceFilterSelectMobile.addEventListener("change", () => {
+  const selectOption = priceFilterSelectMobile.value;
+
+  if (selectOption === "low-mobile") {
+    sortDishesByPrice(true);
+  } else if (selectOption === "high-mobile") {
+    sortDishesByPrice(false);
+  }
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild);
+  }
+
+  updateBoxes(foodData);
+});
+
+// Funktion för att skapa maträttsbox
+function createDishBox(data) {
+  const box = document.createElement("div"); //vit box
     box.className = "white-card";
 
     //Kollar om måltiden inehåller gluten och lägger isåfall
@@ -155,86 +211,12 @@ async function createBoxes() {
     }
 
     gridContainer.appendChild(box); //elementen läggs till i gridContainer
+  
+    return box;
   });
 }
 
-function updateBoxes(data) {
-  //funktion för att uppdatera boxarna av maträttsdata
-  while (gridContainer.firstChild) {
-    gridContainer.removeChild(gridContainer.firstChild); //rensa bort tidigare maträttsboxar
-  }
-
-  data.forEach((item) => {
-    const box = createDishBox(item);
-    gridContainer.appendChild(box);
-  });
-}
-// Anropa funktionen för att skapa boxar när sidan laddas
-createBoxes();
-
-const priceFilterSelect = document.getElementById("price-filter");
-
-priceFilterSelect.addEventListener("change", () => {
-  //lyssnar på ändring som användaren gör på sortera knapp
-  const selectOption = priceFilterSelect.value;
-
-  if (selectOption === "low") {
-    //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
-    sortDishesByPrice(true);
-  } else if (selectOption === "high") {
-    sortDishesByPrice(false);
-  }
-  while (gridContainer.firstChild) {
-    gridContainer.removeChild(gridContainer.firstChild);
-  }
-
-  updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
-});
-// Skapade ett till price-filter för mobil versionen //Daniel
-const priceFilterSelectMobile = document.getElementById("price-filter-mobile");
-priceFilterSelectMobile.addEventListener("change", () => {
-  const selectOption = priceFilterSelectMobile.value;
-
-  if (selectOption === "low-mobile") {
-    sortDishesByPrice(true);
-  } else if (selectOption === "high-mobile") {
-    sortDishesByPrice(false);
-  }
-  while (gridContainer.firstChild) {
-    gridContainer.removeChild(gridContainer.firstChild);
-  }
-
-  updateBoxes(foodData);
-});
-
-// Funktion för att skapa maträttsbox
-function createDishBox(data) {
-  const box = document.createElement("div");
-  box.className = "white-card";
-  box.id = data.category + "-card";
-
-  const img = document.createElement("img");
-  img.src = data.img;
-  box.appendChild(img);
-
-  const title = document.createElement("div");
-  title.className = "dish-title";
-  title.textContent = data.dish.swe;
-  box.appendChild(title);
-
-  const price = document.createElement("div");
-  price.className = "dish-price";
-  price.textContent = data.price;
-  box.appendChild(price);
-
-  const description = document.createElement("div");
-  description.className = "dish-description";
-  description.textContent = data.description.swe;
-  box.appendChild(description);
-
-  return box;
-}
-
+ 
 //Byta språk
 document.getElementById("byta").addEventListener("click", () => {
   document.getElementById("byta").innerHTML = foodData[0].dish.en;
@@ -337,13 +319,28 @@ const allCheckboxes = document.querySelectorAll(".checkboxes");
 //Lägger en eventlistener för varje checkbox
 allCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", (toggle) => {
+
     //Denna if satsen kickar in om vi väljer att "kryssa i" filtret
-    if (toggle.target.checked) {
+    if(toggle.target.checked){
+
+      /*Om man trycker i vego kommer alla andra köttfilter filtreras bort*/
+      if(toggle.target.id === "vego") {
+        allCheckboxes.forEach(box => {
+          if(box.id === "vego" | box.id === "gluten" | box.id === "lactose") {
+            return
+          } else {
+            if(box.checked) {
+              box.click();
+            }
+          }
+        })
+      }
+
       //Lägger till id på checkboxen(samma som kategorierna)
-      activeFilters.push(toggle.target.id);
-      console.log(activeFilters);
+      activeFilters.push(toggle.target.id)
     } else {
-      /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
+
+        /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
         den tryckta boxens id och lägger till den i en ny 
         array och byter sedan plats på den och den "vanliga"*/
       let newArray = activeFilters.filter((arrayItem) => {

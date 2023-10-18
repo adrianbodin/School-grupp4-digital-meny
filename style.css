@@ -92,7 +92,9 @@
   transition: 0.2s;
   margin-bottom: 5px !important;
 }
+
 /* andra versionen av filtret för ipad/mobil */
+
 .version-aside-container {
   display: none;
   position: fixed;
@@ -352,7 +354,9 @@ body {
   text-decoration: none;
   color: gray;
 }
+
 /* Media queries*/
+
 @media (max-height: 600px) {
   .card {
     left: 22% !important;
@@ -617,3 +621,5 @@ body {
 .dish-description {
   font-size: 14px;
 }
+
+
