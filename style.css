@@ -94,6 +94,7 @@
   transition: 0.2s;
   margin-bottom: 5px !important;
 }
+
 .version-aside-container {
   display: none;
   position: fixed;
@@ -324,6 +325,10 @@ body {
   color: gray;
 }
 
+.hero-section {
+  max-width: 80ch;
+}
+
 /* media mx with, 1000, 800, 600 */
 @media (max-height: 600px) {
   .aside-menu-container {
@@ -395,3 +400,5 @@ body {
     padding: 1rem;
   }
 }
+
+
