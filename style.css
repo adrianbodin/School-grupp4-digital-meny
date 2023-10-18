@@ -1,4 +1,4 @@
-/* Box of the aside menu */
+/* Box för första versionen av filtret */
 .aside-menu-container {
   position: fixed;
   left: 0;
@@ -8,15 +8,13 @@
   border-bottom-right-radius: 35px;
   height: 100dvh;
   width: 20rem;
-  background-image: linear-gradient(
-    109.6deg,
-    rgba(255, 255, 255, 0.9) 11.2%,
-    rgba(255, 107, 161, 0.3) 99.1%
-  );
-  padding-top: 17rem;
+  background-color: #ebe3e3;
+
+  padding-top: 16rem;
   padding-bottom: 2rem;
-  z-index: -1;
+  z-index: 1;
   transition: 0.2s;
+  box-shadow: 0 -4px 2px 2px gray;
 }
 
 /*The reset filter text */
@@ -31,13 +29,13 @@
   width: 190px;
   transition: 0.2s;
 }
-/* Hover over reset filter text */
+/* Hover over för reset filter texten */
 #reset-filter:hover {
   color: rgba(184, 170, 149, 0.983);
   text-shadow: 2px 2px 4px rgba(7, 7, 7, 0.3);
   transition: 0.2s ease-in-out;
 }
-/* The roll down menu for filtering the price */
+/* Roll down meny för pris filter */
 #price-filter {
   margin-left: 2rem;
   padding: 10px 30px;
@@ -52,19 +50,19 @@
   transition: 0.2s;
 }
 
-/* container of the categories */
+/* container för kategorier */
 .category-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-/* container for the checkboxes */
+/* container för checkboxarna */
 .checkbox-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-/*Designing the checkboxes  */
+/*Designar checkboxes  */
 .checkboxes {
   height: 18px;
   width: 18px;
@@ -72,13 +70,13 @@
   margin-left: 2rem;
   filter: sepia(1);
 }
-/*Designing the labels  */
+/*Designing the labels för alla filter */
 .labels {
   font-size: 18px;
   padding: 5px 5px 5px 5px;
   letter-spacing: 2px;
 }
-/* Allergic section container */
+/* Allergic section container(allergier container) */
 .allergic-container {
   display: flex;
   flex-direction: column;
@@ -94,37 +92,57 @@
   transition: 0.2s;
   margin-bottom: 5px !important;
 }
+/* andra versionen av filtret för ipad/mobil */
 .version-aside-container {
   display: none;
   position: fixed;
   top: 0;
-  background-image: linear-gradient(
-    109.6deg,
-    rgba(255, 255, 255, 1) 11.2%,
-    rgba(255, 107, 161, 0.5) 99.1%
-  );
+  background-color: rgb(235, 227, 227, 0.9);
   width: 100%;
+
   transition: 0.2s;
-  padding-top: 19rem;
+  padding-top: 17rem;
   border-bottom-left-radius: 13px;
   border-bottom-right-radius: 13px;
-}
-.witdh {
-  width: 700px;
+  transition: 0.4s;
 }
 
-.select-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* container för btn-hide */
+#hide-button {
+  display: none;
+  position: fixed;
+  top: 11.5rem;
+  right: 6rem;
+  z-index: 1001;
+  transition: 0.2s;
 }
-.price-filter-two {
-  padding: 10px 15px !important;
-  margin-bottom: 32px !important;
+/* knapp för att visa och gömma andra versionen av filtret */
+#btn-hide {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 45px;
+  cursor: pointer;
 }
-#category-drop-down {
-  margin-left: 2rem;
-  padding: 10px 20px;
+/* knapp för att visa och gömma footer */
+#social-click-out {
+  position: fixed;
+  top: 12rem;
+  right: 3rem;
+  font-size: 20px;
+  outline: none;
+  border-radius: 7px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  z-index: 1001;
+}
+
+/* pris filtret i andra version av filtret */
+#price-filter-mobile {
+  margin-right: 2rem;
+  padding: 10px 2px;
   border-radius: 8px;
   text-align-last: center;
   cursor: pointer;
@@ -133,23 +151,14 @@
   box-shadow: 2px 2px 5px;
   border: none;
   outline: none;
+  height: 50px;
+  top: 22rem;
+  right: 8rem;
   transition: 0.2s;
 }
-#allergic-drop-down {
-  margin-left: 2rem;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-align-last: center;
-  cursor: pointer;
-  margin-bottom: 2rem;
-  background-color: transparent;
-  box-shadow: 2px 2px 5px;
-  border: none;
-  outline: none;
-  transition: 0.2s;
-}
+/* reset button i andra version filtret */
 #reset-button {
-  margin-left: 2rem;
+  margin-right: 2rem;
   padding: 10px 20px;
   border-radius: 8px;
   text-align-last: center;
@@ -157,9 +166,14 @@
   margin-bottom: 2rem;
   background-color: transparent;
   box-shadow: 2px 2px 5px;
+  height: 50px;
+  top: 18rem;
+  right: 8rem;
   border: none;
   outline: none;
+  transition: 0.2s;
 }
+
 #reset-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
   color: #d4cccc;
@@ -168,12 +182,19 @@
 #reset-button:active {
   box-shadow: 5px 5px 3px black;
 }
+/* Container för buttons i andra version av filter */
+.button-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+/* väljer select för att komma åt option och stylar */
 select > option {
   background-color: rgba(255, 192, 203, 0.9);
   color: black;
   font-weight: 700;
   font-size: 15px;
 }
+/* options i select roll down menu */
 option:not(:checked) {
   background-color: rgba(128, 128, 128, 0.2);
 }
@@ -207,6 +228,7 @@ body {
   position: fixed;
   top: 1rem;
   left: 5rem;
+
   transition: 0.2s;
 }
 #meny {
@@ -223,7 +245,7 @@ body {
   justify-content: center;
   align-items: center;
   top: 25%;
-  left: 30%;
+  left: 22%;
   padding-bottom: 20rem;
 }
 .white-card {
@@ -237,6 +259,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 11rem;
 }
 .white-card img {
   /* Bild */
@@ -263,23 +286,33 @@ body {
   /* maträtt-beskrivning */
   color: rgb(109, 109, 109);
   padding: 0px;
-  margin: 10px;
+  margin-left: 1rem;
 }
-
+/* knappen för att byta språk */
 #byta {
   position: inherit;
   right: 0;
   margin: 2rem;
   width: 200px;
   height: 50px;
+  border-radius: 7px;
+  background: rgba(203, 179, 179, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
 }
-
+#byta:hover {
+  background: rgba(155, 137, 137, 0.8);
+  cursor: pointer;
+}
+#byta:active {
+  box-shadow: inset 2px 2px 7px rgba(0, 0, 0, 0.3);
+}
+/* footer */
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: rgba(0, 0, 0, 0.3) 2px solid;
-  padding: 1.2rem;
+  box-shadow: 0 -4px 2px -2px gray;
   font-weight: 700;
   background: #ebe3e3;
   position: fixed;
@@ -289,9 +322,11 @@ body {
   overflow: hidden;
   margin-top: auto;
   opacity: 0.9;
-  transition: 0.2s;
+  transition: 0.5s;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
-
+/* social icons */
 .social-list {
   list-style: none;
   display: flex;
@@ -300,75 +335,121 @@ body {
   align-items: center;
   text-align: center;
   padding-right: 2rem;
+  font-size: 15px;
 }
 
 .social-div {
   text-align: center;
 }
+/* footer text */
 .footer-contact {
   position: fixed;
   right: 35px;
   list-style: none;
 }
-
-.footer-logo {
-  border-radius: 100%;
-  position: fixed;
-  bottom: 2%;
-  left: 2%;
-  height: 10rem;
-  width: 10rem;
-}
+/* footer text */
 .social-links {
   text-decoration: none;
   color: gray;
 }
-
-/* media mx with, 1000, 800, 600 */
+/* Media queries*/
 @media (max-height: 600px) {
+  .card {
+    left: 22% !important;
+    top: 40% !important;
+  }
+}
+/* media mx with, 1000, 800, 600 */
+@media (max-height: 800px) {
+  #hide-button {
+    display: block;
+  }
   .aside-menu-container {
     display: none;
   }
   .version-aside-container {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
   }
-}
-@media (max-height: 800px) {
-  #reset-filter {
+  .category-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
-  }
-  #price-filter {
-    margin-bottom: 1rem;
-  }
-  .allergic-container {
-    gap: 5px;
   }
   .category-container {
-    gap: 5px;
+    flex-direction: column;
+    transform: translatey(-16.1px);
+    gap: 0;
   }
+  .category-container-two {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.2rem;
+  }
+  .allergic-container {
+    flex-direction: row;
+    transform: translateX(15.1px);
+    border-top-style: groove;
+    gap: 0;
+    margin-bottom: 1rem;
+  }
+
   .aside-container-title {
-    padding: 0;
     font-size: 15px;
+    margin-bottom: 0;
+  }
+  .button-container {
+    transform: translateX(20.1px);
+  }
+  #meny {
+    display: none;
+  }
+
+  .footer-logo {
+    display: none;
+  }
+  .card {
+    top: 60%;
+    left: 20%;
+  }
+}
+@media (max-width: 2000px) {
+  .card {
+    top: 28%;
+  }
+}
+@media (max-width: 1285px) {
+  .card {
+    left: 30%;
   }
 }
 @media (max-width: 1000px) {
   .aside-menu-container {
     display: none;
   }
+
+  #hide-button {
+    display: block;
+  }
   #price-filter {
     background-color: transparent;
   }
   .card {
-    top: 37%;
+    position: static;
+    display: flex;
+    margin-top: 18rem;
   }
   .white-card {
     justify-content: center;
     align-items: center;
-    padding-bottom: 30px;
-    float: clear;
+    padding-bottom: 11rem;
+    clear: left;
     margin: 0;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
   .white-card img {
     height: 235px;
@@ -377,7 +458,41 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
+  }
+  .category-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom-style: groove;
+    transform: translateX(-10.1px);
+  }
+  .category-container {
     flex-direction: column;
+    transform: translatey(-16.1px);
+
+    gap: 0;
+  }
+  .category-container-two {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.2rem;
+  }
+  .allergic-container {
+    flex-direction: row;
+    transform: translateX(-10.1px);
+    margin-bottom: 1rem;
+  }
+  .aside-container-title {
+    font-size: 15px;
+    margin-bottom: 0;
+  }
+  .button-container {
+    transform: translateX(20.1px);
+  }
+  #meny {
+    display: none;
   }
 
   .footer-logo {
@@ -385,13 +500,120 @@ body {
   }
 }
 @media (max-width: 800px) {
-  footer {
-    padding: 2rem;
+  .card {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer {
+    font-size: 14px;
+  }
+  .social-list {
+    font-size: 10px;
   }
 }
 @media (max-width: 600px) {
-  footer {
+  .footer {
     flex-direction: column;
-    padding: 1rem;
   }
+  #logo {
+    left: 0.8rem;
+    height: 10rem;
+    width: 8rem;
+  }
+  .footer-contact {
+    position: static;
+    margin: 0;
+  }
+  #byta {
+    margin-top: 2rem;
+    margin-right: 1rem;
+    width: 100px;
+    padding: 0;
+  }
+}
+@media (max-width: 400px) {
+  .white-card {
+    width: 285px;
+    height: 230px;
+    padding-bottom: 11rem;
+  }
+  .white-card img {
+    width: 285px;
+    height: 250px;
+  }
+  .card {
+    margin-top: 18rem;
+  }
+  #byta {
+    margin-top: 2rem;
+    margin-right: 0.5rem;
+    width: 85px;
+    padding: 0;
+  }
+  .labels {
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+}
+@media (max-width: 300px) {
+  #byta {
+    margin-top: 2rem;
+    margin-right: 0.5rem;
+    width: 65px;
+    padding: 0;
+  }
+  .labels {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+}
+.checkbox-container {
+  gap: 0;
+}
+.checkboxes {
+  margin-top: 0.5rem;
+}
+#hide-button {
+  right: 4rem;
+}
+#social-click-out {
+  right: 1.25rem;
+}
+.white-card {
+  width: 250px;
+  height: 220px;
+}
+.white-card img {
+  width: 250px;
+  height: 240px;
+}
+.dish-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+.dish-price {
+  font-size: 16px;
+}
+.dish-description {
+  font-size: 14px;
+}
+.white-card {
+  width: 250px;
+  height: 220px;
+}
+.white-card img {
+  width: 250px;
+  height: 240px;
+}
+.dish-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+.dish-price {
+  font-size: 16px;
+}
+.dish-description {
+  font-size: 14px;
 }
