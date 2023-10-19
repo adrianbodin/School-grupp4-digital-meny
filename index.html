@@ -22,6 +22,7 @@
         Font för meny loggan:
         font-family: 'Smooch', cursive;
     -->
+    <meta name="description" content="This page is about Lucky Ducks menu and prices">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
@@ -35,7 +36,7 @@
         <button id="byta">Byt till Engelska</button>
       </div>
       <!-- button för att gömma elr visa footern -->
-      <button id="social-click-out">
+      <button id="social-click-out" aria-label="Hide footer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -50,7 +51,7 @@
       </button>
       <!-- button för att gömma elr visa andra versionen av filtret -->
       <div id="hide-button">
-        <button id="btn-hide">
+        <button id="btn-hide" aria-label="Hide options">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -70,7 +71,7 @@
       <!-- The reset filter text -->
       <p id="reset-filter">Återställ filter</p>
       <!-- The drop down menu for filtering after price -->
-      <select name="filter-price" id="price-filter">
+      <select name="filter-price" aria-label="Price filter" id="price-filter">
         <option class="options" disabled selected id="price">Pris</option>
 
         <!-- low to high option -->
@@ -87,46 +88,51 @@
       <div class="category-container">
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="vego" /><label
+          <input type="checkbox" class="checkboxes vego" aria-label="Checkbox vegetarian meals"/><label
             class="labels"
             for="checkbox"
             id="label_vego"
+            aria-label="Checkbox for vegetarian meals"
             >Vegetariskt</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="chicken" /><label
+          <input type="checkbox" class="checkboxes chicken" aria-label="Checkbox for chicken meals"/><label
             class="labels"
             for="checkbox"
             id="label_chicken"
+            aria-label="Checkbox for chicken meals"
             >Kyckling</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="pork" /><label
+          <input type="checkbox" class="checkboxes pork" aria-label="Checkbox for pork meals"/><label
             class="labels"
             for="checkbox"
             id="label_pork"
+            aria-label="Checkbox for pork meals"
             >Fläsk</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="meat" /><label
+          <input type="checkbox" class="checkboxes meat" aria-label="Checkbox for meat meals"/><label
             class="labels"
             for="checkbox"
             id="label_beef"
+            aria-label="Checkbox for meat meals"
             >Nöt</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="fish" /><label
+          <input type="checkbox" class="checkboxes fish" aria-label="Checkbox for fish meals"/><label
             class="labels"
             for="checkbox"
             id="label_fish"
+            aria-label="Checkbox for fish meals"
             >Fisk</label
           >
         </div>
@@ -136,19 +142,21 @@
         <h2 class="aside-container-title" id="allergy_id">Allergier</h2>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="gluten" /><label
+          <input type="checkbox" class="checkboxes gluten" aria-label="Checkbox for gluten-free meals"/><label
             class="labels"
             for="checkbox"
             id="label_gluten"
+            aria-label="Checkbox for gluten-free meals"
             >Glutenfritt</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="lactose" /><label
+          <input type="checkbox" class="checkboxes lactose" aria-label="Checkbox for lactose-free meals"/><label
             class="labels"
             for="checkbox"
             id="label_lactose"
+            aria-label="Checkbox for lactose-free meals"
             >Laktosfritt</label
           >
         </div>
@@ -165,7 +173,7 @@
     <aside class="version-aside-container">
       <div class="button-container">
         <button id="reset-button">Återställ filter</button>
-        <select name="filter-price" id="price-filter-mobile">
+        <select name="filter-price" id="price-filter-mobile" aria-label="Price filter">
 
           <option class="options" disabled selected id="price">Pris</option>
 
@@ -184,19 +192,21 @@
       <div class="allergic-container">
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="gluten" /><label
+          <input type="checkbox" class="checkboxes gluten" aria-label="Checkbox for gluten-free meals" /><label
             class="labels"
             for="checkbox"
             id="label_gluten"
+            aria-label="Checkbox for gluten-free meals"
             >Glutenfritt</label
           >
         </div>
         <div class="checkbox-container">
           <!-- Checkbox -->
-          <input type="checkbox" class="checkboxes" id="lactose" /><label
+          <input type="checkbox" class="checkboxes lactose" aria-label="Checkbox for lactose-free meals" /><label
             class="labels"
             for="checkbox"
             id="label_lactose"
+            aria-label="Checkbox for lactose-free meals"
             >Laktosfritt</label
           >
         </div>
@@ -205,19 +215,21 @@
         <div class="category-container">
           <div class="checkbox-container">
             <!-- Checkbox -->
-            <input type="checkbox" class="checkboxes" id="vego" /><label
+            <input type="checkbox" class="checkboxes vego" aria-label="Checkbox for vegetarian meals" /><label
               class="labels"
               for="checkbox"
               id="label_vego"
+              aria-label="Checkbox for vegetarian meals"
               >Vegetariskt</label
             >
           </div>
           <div class="checkbox-container">
             <!-- Checkbox -->
-            <input type="checkbox" class="checkboxes" id="chicken" /><label
+            <input type="checkbox" class="checkboxes chicken" aria-label="Checkbox for chicken meals" /><label
               class="labels"
               for="checkbox"
               id="label_chicken"
+              aria-label="Checkbox for chicken meals"
               >Kyckling</label
             >
           </div>
@@ -225,29 +237,32 @@
         <div class="category-container-two">
           <div class="checkbox-container">
             <!-- Checkbox -->
-            <input type="checkbox" class="checkboxes" id="pork" /><label
+            <input type="checkbox" class="checkboxes pork" aria-label="Checkbox for pork meals" /><label
               class="labels"
               for="checkbox"
               id="label_pork"
+              aria-label="Checkbox for pork meals"
               >Fläsk</label
             >
           </div>
 
           <div class="checkbox-container">
             <!-- Checkbox -->
-            <input type="checkbox" class="checkboxes" id="meat" /><label
+            <input type="checkbox" class="checkboxes meat" aria-label="Checkbox for meat meals"/><label
               class="labels"
               for="checkbox"
               id="label_beef"
+              aria-label="Checkbox for meat meals"
               >Nöt</label
             >
           </div>
           <div class="checkbox-container">
             <!-- Checkbox -->
-            <input type="checkbox" class="checkboxes" id="fish" /><label
+            <input type="checkbox" class="checkboxes fish" aria-label="Checkbox for fish meals" /><label
               class="labels"
               for="checkbox"
               id="label_fish"
+              aria-label="Checkbox for fish meals"
               >Fisk</label
             >
           </div>
@@ -260,7 +275,8 @@
         <h3>Våra sociala medier:</h3>
         <ul class="social-list">
           <li>
-            <a href=""
+            <a href="https://www.facebook.com/"
+              aria-label="Link to the resturants facebook page"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="4em"
@@ -278,7 +294,8 @@
             ></a>
           </li>
           <li>
-            <a href=""
+            <a href="https://www.instagram.com/"
+            aria-label="Link to the resturants instagram page"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="4em"
@@ -334,7 +351,8 @@
             ></a>
           </li>
           <li>
-            <a href=""
+            <a href="https://www.tiktok.com/"
+            aria-label="Link to the resturants tiktok page"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="4em"
