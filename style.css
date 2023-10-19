@@ -260,7 +260,6 @@ body {
   margin: 40px;
   display: flex;
   flex-wrap: wrap;
-  
   justify-content: space-between;
   padding-bottom: 11rem;
 
@@ -294,7 +293,7 @@ body {
   padding: 0px;
   margin: 0px 10px 0px 10px;
 }
- .gluten-free {
+ .gluten-free  {
   display: block;
   font-size: 15px;
   padding: 4px;
@@ -558,7 +557,7 @@ body {
   .white-card {
     width: 300px;
     height: 250px;
-    padding-bottom: 11rem;
+    padding-bottom: 13rem;
   }
   .white-card img {
     width: 300px;
