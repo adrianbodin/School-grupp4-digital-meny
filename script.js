@@ -22,16 +22,6 @@ Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
 
-//simple function for reseting the filters, using simple location.reload when "clicked"(Daniel)
-const resetFilter = document.getElementById("reset-filter");
-resetFilter.addEventListener("click", () => {
-  window.location.replace(window.location.href);
-});
-const resetButton = document.getElementById("reset-button");
-resetButton.addEventListener("click", () => {
-  location.reload();
-});
-
 //Javascript för att minska headern --Johan
 window.onscroll = function () {
   scrollFunction();
@@ -163,60 +153,58 @@ priceFilterSelectMobile.addEventListener("change", () => {
 // Funktion för att skapa maträttsbox
 function createDishBox(data) {
   const box = document.createElement("div"); //vit box
-    box.className = "white-card";
+  box.className = "white-card";
 
-    //Kollar om måltiden inehåller gluten och lägger isåfall
-    //till detta i id
-    if (data.gluten === false && data.lactose === false) {
-      box.id = "glutenfree" + "lactosefree" + data.category + "-card";
-    } else if (data.gluten === false) {
-      box.id = "glutenfree" + data.category + "-card";
-    } else if (data.lactose === false) {
-      box.id = "lactosefree" + data.category + "-card";
-    } else {
-      box.id = data.category + "-card";
-    }
+  //Kollar om måltiden inehåller gluten och lägger isåfall
+  //till detta i id
+  if (data.gluten === false && data.lactose === false) {
+    box.id = "glutenfree" + "lactosefree" + data.category + "-card";
+  } else if (data.gluten === false) {
+    box.id = "glutenfree" + data.category + "-card";
+  } else if (data.lactose === false) {
+    box.id = "lactosefree" + data.category + "-card";
+  } else {
+    box.id = data.category + "-card";
+  }
 
-    const img = document.createElement("img"); //bild
-    img.src = data.img;
-    box.appendChild(img);
+  const img = document.createElement("img"); //bild
+  img.src = data.img;
+  box.appendChild(img);
 
-    const title = document.createElement("div"); //titel
-    title.className = "dish-title";
-    title.textContent = data.dish.swe;
-    box.appendChild(title);
+  const title = document.createElement("div"); //titel
+  title.className = "dish-title";
+  title.textContent = data.dish.swe;
+  box.appendChild(title);
 
-    const price = document.createElement("div"); //pris
-    price.className = "dish-price";
-    price.textContent = data.price;
-    box.appendChild(price);
+  const price = document.createElement("div"); //pris
+  price.className = "dish-price";
+  price.textContent = data.price;
+  box.appendChild(price);
 
-    const description = document.createElement("div"); //beskrivning
-    description.className = "dish-description";
-    description.textContent = data.description.swe;
-    box.appendChild(description);
+  const description = document.createElement("div"); //beskrivning
+  description.className = "dish-description";
+  description.textContent = data.description.swe;
+  box.appendChild(description);
 
-    if (data.gluten === false) {
-      const glutenFree = document.createElement("p");
-      glutenFree.className = "gluten-free";
-      glutenFree.textContent = "Glutenfri";
-      box.appendChild(glutenFree);
-    }
+  if (data.gluten === false) {
+    const glutenFree = document.createElement("p");
+    glutenFree.className = "gluten-free";
+    glutenFree.textContent = "Glutenfri";
+    box.appendChild(glutenFree);
+  }
 
-    if (data.lactose === false) {
-      const lactoseFree = document.createElement("p");
-      lactoseFree.className = "lactose-free";
-      lactoseFree.textContent = "Laktosfri";
-      box.appendChild(lactoseFree);
-    }
+  if (data.lactose === false) {
+    const lactoseFree = document.createElement("p");
+    lactoseFree.className = "lactose-free";
+    lactoseFree.textContent = "Laktosfri";
+    box.appendChild(lactoseFree);
+  }
 
-    gridContainer.appendChild(box); //elementen läggs till i gridContainer
-  
-    return box;
-  });
+  gridContainer.appendChild(box); //elementen läggs till i gridContainer
+
+  return box;
 }
 
- 
 //Byta språk
 document.getElementById("byta").addEventListener("click", () => {
   document.getElementById("byta").innerHTML = foodData[0].dish.en;
@@ -319,28 +307,29 @@ const allCheckboxes = document.querySelectorAll(".checkboxes");
 //Lägger en eventlistener för varje checkbox
 allCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", (toggle) => {
-
     //Denna if satsen kickar in om vi väljer att "kryssa i" filtret
-    if(toggle.target.checked){
-
+    if (toggle.target.checked) {
       /*Om man trycker i vego kommer alla andra köttfilter filtreras bort*/
-      if(toggle.target.id === "vego") {
-        allCheckboxes.forEach(box => {
-          if(box.id === "vego" | box.id === "gluten" | box.id === "lactose") {
-            return
+      if (toggle.target.id === "vego") {
+        allCheckboxes.forEach((box) => {
+          if (
+            (box.id === "vego") |
+            (box.id === "gluten") |
+            (box.id === "lactose")
+          ) {
+            return;
           } else {
-            if(box.checked) {
+            if (box.checked) {
               box.click();
             }
           }
-        })
+        });
       }
 
       //Lägger till id på checkboxen(samma som kategorierna)
-      activeFilters.push(toggle.target.id)
+      activeFilters.push(toggle.target.id);
     } else {
-
-        /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
+      /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
         den tryckta boxens id och lägger till den i en ny 
         array och byter sedan plats på den och den "vanliga"*/
       let newArray = activeFilters.filter((arrayItem) => {
@@ -416,3 +405,97 @@ btnSocials.addEventListener("click", () => {
   }
   Hidden = !Hidden; // om hidden är false blir den true och om hidden är true blir den false osv.
 });
+
+// Get all checkboxes in aside-menu-container
+const asideMenuCheckboxes = document.querySelectorAll(
+  ".aside-menu-container .checkboxes"
+);
+// Get all checkboxes in version-aside-container
+const versionAsideCheckboxes = document.querySelectorAll(
+  ".version-aside-container .checkboxes"
+);
+// Function to synchronize checkboxes based on IDs
+function synchronizeCheckboxes(sourceCheckbox, targetCheckboxes) {
+  targetCheckboxes.forEach((checkbox) => {
+    if (checkbox.id === sourceCheckbox.id) {
+      checkbox.checked = sourceCheckbox.checked;
+    }
+  });
+}
+// Add event listeners to aside-menu-container checkboxes
+asideMenuCheckboxes.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    synchronizeCheckboxes(checkbox, versionAsideCheckboxes);
+  });
+});
+// Add event listeners to version-aside-container checkboxes
+versionAsideCheckboxes.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    synchronizeCheckboxes(checkbox, asideMenuCheckboxes);
+  });
+});
+
+const dropdown1 = document.getElementById("price-filter");
+const dropdown2 = document.getElementById("price-filter-mobile");
+// Function to synchronize select options
+function synchronizeSelectOptions(sourceSelect, targetSelect) {
+  const selectedOption = sourceSelect.options[sourceSelect.selectedIndex].value;
+  // Find the corresponding option in the target select and set it as selected
+  for (let i = 0; i < targetSelect.options.length; i++) {
+    if (targetSelect.options[i].value === selectedOption) {
+      targetSelect.selectedIndex = i;
+      break;
+    }
+  }
+}
+// Add change event listener to dropdown1
+dropdown1.addEventListener("change", () => {
+  synchronizeSelectOptions(dropdown1, dropdown2);
+  // If "Lägst till högst" or "Högst till lägst" is selected, set it in both dropdowns
+  if (dropdown1.value === "low") {
+    setBothDropdownsSelectedIndex(1); // "Lägst till högst" is the second option
+  } else if (dropdown1.value === "high") {
+    setBothDropdownsSelectedIndex(2); //  "Högst till lägst" is the third option
+  }
+});
+// Add change event listener to dropdown2
+dropdown2.addEventListener("change", () => {
+  synchronizeSelectOptions(dropdown2, dropdown1);
+
+  // If "Lägst till högst" or "Högst till lägst" is selected, set it in both dropdowns
+  if (dropdown2.value === "low-mobile") {
+    setBothDropdownsSelectedIndex(1); // Assuming "Lägst till högst" is the second option
+  } else if (dropdown2.value === "high-mobile") {
+    setBothDropdownsSelectedIndex(2); // Assuming "Högst till lägst" is the third option
+  }
+});
+// Function to set selected index in both dropdowns
+function setBothDropdownsSelectedIndex(index) {
+  dropdown1.selectedIndex = index;
+  dropdown2.selectedIndex = index;
+}
+
+// Function to reset all filters
+function resetFilters() {
+  // Uncheck all checkboxes
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+
+  // Reset select dropdowns to the default option
+  dropdown1.selectedIndex = 0;
+  dropdown2.selectedIndex = 0;
+
+  // Reset activeFilters array
+  activeFilters = [];
+  // Reset displayed meals to show all
+  displayFilteredMeals([]);
+}
+
+// Add click event listener to the reset filter button
+const resetFilterButton = document.getElementById("reset-filter");
+resetFilterButton.addEventListener("click", resetFilters);
+
+// Add click event listener to the reset button in mobile version
+const resetButtonMobile = document.getElementById("reset-button");
+resetButtonMobile.addEventListener("click", resetFilters);
