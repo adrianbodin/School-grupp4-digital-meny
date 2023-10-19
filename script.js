@@ -110,6 +110,7 @@ function updateBoxes(data) {
     const box = createDishBox(item);
     gridContainer.appendChild(box);
   });
+  
 }
 // Anropa funktionen för att skapa boxar när sidan laddas
 createBoxes();
@@ -169,6 +170,7 @@ function createDishBox(data) {
 
   const img = document.createElement("img"); //bild
   img.src = data.img;
+  img.alt = data.imageDescription;
   box.appendChild(img);
 
   const title = document.createElement("div"); //titel
@@ -318,19 +320,18 @@ let activeFilters = [];
 
 //tar in alla checkboxes
 const allCheckboxes = document.querySelectorAll(".checkboxes");
-
 //Lägger en eventlistener för varje checkbox
 allCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", (toggle) => {
     //Denna if satsen kickar in om vi väljer att "kryssa i" filtret
     if (toggle.target.checked) {
       /*Om man trycker i vego kommer alla andra köttfilter filtreras bort*/
-      if (toggle.target.id === "vego") {
+      if (toggle.target.classList[1] === "vego") {
         allCheckboxes.forEach((box) => {
           if (
-            (box.id === "vego") |
-            (box.id === "gluten") |
-            (box.id === "lactose")
+            (box.classList[1] === "vego") |
+            (box.classList[1] === "gluten") |
+            (box.classList[1] === "lactose")
           ) {
             return;
           } else {
@@ -342,13 +343,13 @@ allCheckboxes.forEach((checkbox) => {
       }
 
       //Lägger till id på checkboxen(samma som kategorierna)
-      activeFilters.push(toggle.target.id);
+      activeFilters.push(toggle.target.classList[1]);
     } else {
       /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
         den tryckta boxens id och lägger till den i en ny 
         array och byter sedan plats på den och den "vanliga"*/
       let newArray = activeFilters.filter((arrayItem) => {
-        return arrayItem !== toggle.target.id;
+        return arrayItem !== toggle.target.classList[1];
       });
       activeFilters = newArray;
     }
@@ -432,7 +433,7 @@ const versionAsideCheckboxes = document.querySelectorAll(
 // Function to synchronize checkboxes based on IDs
 function synchronizeCheckboxes(sourceCheckbox, targetCheckboxes) {
   targetCheckboxes.forEach((checkbox) => {
-    if (checkbox.id === sourceCheckbox.id) {
+    if (checkbox.classList[1] === sourceCheckbox.classList[1]) {
       checkbox.checked = sourceCheckbox.checked;
     }
   });
@@ -504,7 +505,11 @@ function resetFilters() {
   // Reset activeFilters array
   activeFilters = [];
   // Reset displayed meals to show all
-  displayFilteredMeals([]);
+  //displayFilteredMeals([]); 
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild)
+  };
+  createBoxes();
 }
 
 // Add click event listener to the reset filter button
