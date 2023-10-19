@@ -208,8 +208,7 @@ function createDishBox(data) {
 
 //Byta språk
 document.getElementById("byta").addEventListener("click", () => {
-  document.getElementById("byta").innerHTML = foodData[0].dish.en;
-
+  changeCardLanguage();
   if (document.querySelector("aside").classList.contains("swe")) {
     /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
     document.getElementById("reset-filter").textContent = langData["eng"].title;
@@ -298,6 +297,21 @@ const langData = {
     lactose: "Laktosfri",
   },
 };
+/**Byta cardsens språk */
+function changeCardLanguage(){
+  let nrOfCards = document.getElementsByClassName("white-card");
+  if(document.querySelector("aside").classList.contains("swe")){
+    for(let i=0; i < nrOfCards.length; i++){
+      nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.en;
+      nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.en;
+    }
+  }else if(document.querySelector("aside").classList.contains("eng")){
+    for(let i=0; i < nrOfCards.length; i++){
+      nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.swe;
+      nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.swe;
+    }
+  }
+}
 
 //I denna arrayen sparas våra aktiva filter som vi valt
 let activeFilters = [];
