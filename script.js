@@ -40,7 +40,8 @@ window.onscroll = function () {
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("meny").style.fontSize = "4rem";
-    document.getElementById("logo").style.width = "120px";
+    document.getElementById("logo").style.height = "120px";
+    document.getElementById("logo").style.width = "110px";
     document.getElementById("logo").style.top = "0.5rem";
     document.getElementById("head_container").style.padding = "11rem";
     document.querySelector(".aside-menu-container").style.paddingTop = "11rem";
@@ -49,14 +50,19 @@ function scrollFunction() {
     document.getElementById("reset-filter").style.fontSize = "25px";
     document.getElementById("reset-filter").style.width = "190px";
     document.querySelector(".version-aside-container").style.paddingTop =
-      "12rem";
-    document.querySelector(".footer-logo").style.height = "8rem";
-    document.querySelector(".footer-logo").style.width = "8rem";
+      "10rem";
+
     document.querySelector(".footer").style.padding = "0.4rem";
-    document.querySelector(".footer").style.opacity = "0.4";
+    document.querySelector(".footer").style.opacity = "0.7";
+    document.getElementById("price-filter-mobile").style.top = "15rem";
+    document.getElementById("reset-button").style.top = "11rem";
+    document.getElementById("hide-button").style.top = "6.5rem";
+    document.getElementById("social-click-out").style.top = "7rem";
   } else {
     document.getElementById("meny").style.fontSize = "7rem";
-    document.getElementById("logo").style.width = "180px";
+    document.getElementById("logo").style.top = "1.2rem";
+    document.getElementById("logo").style.width = "150px";
+    document.getElementById("logo").style.height = "170px";
     document.getElementById("head_container").style.padding = "16rem";
     document.querySelector(".aside-menu-container").style.paddingTop =
       "15.5rem";
@@ -65,11 +71,14 @@ function scrollFunction() {
     document.getElementById("reset-filter").style.fontSize = "27px";
     document.getElementById("reset-filter").style.width = "300px";
     document.querySelector(".version-aside-container").style.paddingTop =
-      "17rem";
-    document.querySelector(".footer-logo").style.height = "10rem";
-    document.querySelector(".footer-logo").style.width = "10rem";
-    document.querySelector(".footer").style.padding = "1.2rem";
+      "15rem";
+    document.getElementById("price-filter-mobile").style.top = "20rem";
+    document.getElementById("reset-button").style.top = "16rem";
+
+    document.querySelector(".footer").style.padding = "0.7rem";
     document.querySelector(".footer").style.opacity = "0.9";
+    document.getElementById("hide-button").style.top = "11.5rem";
+    document.getElementById("social-click-out").style.top = "12rem";
   }
 }
 
@@ -97,61 +106,7 @@ async function createBoxes() {
 
   // Loopa igenom varje maträtt och skapa ett card för varje rätt
   foodData.forEach((data) => {
-    const box = document.createElement("div"); //vit box
-    box.className = "white-card";
-    
-    //Kollar om måltiden inehåller gluten och lägger isåfall
-    //till detta i id
-    if(data.gluten === false && data.lactose === false) {
-      box.id = "glutenfree" + "lactosefree" + data.category + "-card";
-    } 
-    else if (data.gluten === false) {
-      box.id = "glutenfree" + data.category + "-card";
-    }
-    else if (data.lactose === false) {
-      box.id = "lactosefree" + data.category + "-card";
-    } else {
-      box.id = data.category + "-card";
-    }
-    
-
-    const img = document.createElement("img"); //bild
-    img.src = data.img;
-    box.appendChild(img);
-
-    const title = document.createElement("div"); //titel
-    title.className = "dish-title";
-    title.textContent = data.dish.swe;
-    box.appendChild(title);
-
-    const price = document.createElement("div"); //pris
-    price.className = "dish-price";
-    price.textContent = data.price;
-    box.appendChild(price);
-
-    const description = document.createElement("div"); //beskrivning
-    description.className = "dish-description";
-    description.textContent = data.description.swe;
-    box.appendChild(description);
-
-
-    if(data.gluten === false) {
-      const glutenFree = document.createElement("p");
-      glutenFree.className = "gluten-free";
-      glutenFree.textContent = "Glutenfri";
-      box.appendChild(glutenFree);
-    }
-
-    if(data.lactose === false) {
-      const lactoseFree = document.createElement("p");
-      lactoseFree.className = "lactose-free";
-      lactoseFree.textContent = "Laktosfri";
-      box.appendChild(lactoseFree);
-    }
-    
-
-    gridContainer.appendChild(box); //elementen läggs till i gridContainer  
-
+    createDishBox(data);
   });
 }
 
@@ -188,34 +143,79 @@ priceFilterSelect.addEventListener("change", () => {
   updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
 });
 
+// Skapade ett till price-filter för mobil versionen //Daniel
+const priceFilterSelectMobile = document.getElementById("price-filter-mobile");
+priceFilterSelectMobile.addEventListener("change", () => {
+  const selectOption = priceFilterSelectMobile.value;
+
+  if (selectOption === "low-mobile") {
+    sortDishesByPrice(true);
+  } else if (selectOption === "high-mobile") {
+    sortDishesByPrice(false);
+  }
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.firstChild);
+  }
+
+  updateBoxes(foodData);
+});
+
 // Funktion för att skapa maträttsbox
 function createDishBox(data) {
-  const box = document.createElement("div");
-  box.className = "white-card";
-  box.id = data.category + "-card";
+  const box = document.createElement("div"); //vit box
+    box.className = "white-card";
 
-  const img = document.createElement("img");
-  img.src = data.img;
-  box.appendChild(img);
+    //Kollar om måltiden inehåller gluten och lägger isåfall
+    //till detta i id
+    if (data.gluten === false && data.lactose === false) {
+      box.id = "glutenfree" + "lactosefree" + data.category + "-card";
+    } else if (data.gluten === false) {
+      box.id = "glutenfree" + data.category + "-card";
+    } else if (data.lactose === false) {
+      box.id = "lactosefree" + data.category + "-card";
+    } else {
+      box.id = data.category + "-card";
+    }
 
-  const title = document.createElement("div");
-  title.className = "dish-title";
-  title.textContent = data.dish.swe;
-  box.appendChild(title);
+    const img = document.createElement("img"); //bild
+    img.src = data.img;
+    box.appendChild(img);
 
-  const price = document.createElement("div");
-  price.className = "dish-price";
-  price.textContent = data.price;
-  box.appendChild(price);
+    const title = document.createElement("div"); //titel
+    title.className = "dish-title";
+    title.textContent = data.dish.swe;
+    box.appendChild(title);
 
-  const description = document.createElement("div");
-  description.className = "dish-description";
-  description.textContent = data.description.swe;
-  box.appendChild(description);
+    const price = document.createElement("div"); //pris
+    price.className = "dish-price";
+    price.textContent = data.price;
+    box.appendChild(price);
 
-  return box;
+    const description = document.createElement("div"); //beskrivning
+    description.className = "dish-description";
+    description.textContent = data.description.swe;
+    box.appendChild(description);
+
+    if (data.gluten === false) {
+      const glutenFree = document.createElement("p");
+      glutenFree.className = "gluten-free";
+      glutenFree.textContent = "Glutenfri";
+      box.appendChild(glutenFree);
+    }
+
+    if (data.lactose === false) {
+      const lactoseFree = document.createElement("p");
+      lactoseFree.className = "lactose-free";
+      lactoseFree.textContent = "Laktosfri";
+      box.appendChild(lactoseFree);
+    }
+
+    gridContainer.appendChild(box); //elementen läggs till i gridContainer
+  
+    return box;
 }
 
+ 
 //Byta språk
 document.getElementById("byta").addEventListener("click", () => {
   document.getElementById("byta").innerHTML = foodData[0].dish.en;
@@ -309,8 +309,6 @@ const langData = {
   },
 };
 
-
-
 //I denna arrayen sparas våra aktiva filter som vi valt
 let activeFilters = [];
 
@@ -318,50 +316,64 @@ let activeFilters = [];
 const allCheckboxes = document.querySelectorAll(".checkboxes");
 
 //Lägger en eventlistener för varje checkbox
-allCheckboxes.forEach(checkbox => {
+allCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", (toggle) => {
 
     //Denna if satsen kickar in om vi väljer att "kryssa i" filtret
     if(toggle.target.checked){
 
+      /*Om man trycker i vego kommer alla andra köttfilter filtreras bort*/
+      if(toggle.target.id === "vego") {
+        allCheckboxes.forEach(box => {
+          if(box.id === "vego" | box.id === "gluten" | box.id === "lactose") {
+            return
+          } else {
+            if(box.checked) {
+              box.click();
+            }
+          }
+        })
+      }
+
       //Lägger till id på checkboxen(samma som kategorierna)
       activeFilters.push(toggle.target.id)
-      console.log(activeFilters)
     } else {
+
         /*Annars(om vi "kryssar ur" boxen) filtrera vi bort
         den tryckta boxens id och lägger till den i en ny 
         array och byter sedan plats på den och den "vanliga"*/
-        let newArray = activeFilters.filter(arrayItem => {
-          return arrayItem !== toggle.target.id
+      let newArray = activeFilters.filter((arrayItem) => {
+        return arrayItem !== toggle.target.id;
       });
-      activeFilters = newArray
+      activeFilters = newArray;
     }
 
     /*Kör denna funktionen efter vi lagt till eller tagit bort
     något ur våran array. Denna ska även skickas in en parameter
     av en array som vi gör här med våra aktiva filter*/
     displayFilteredMeals(activeFilters);
-    
   });
 });
 
 //tar in en array av våra aktuella filter
 function displayFilteredMeals(filters) {
-
   //Tar in alla våra divar med maträtterna
   const mealDivs = document.querySelectorAll(".white-card");
-  
+
   /*Kollar om våran aktiva filter array är tom, om den är det
   så sätter vi display:flex på alla divar(gör den synliga)*/
-  if(filters.length === 0) {
-    mealDivs.forEach(meal => {
-    meal.style.display = "flex";
-  });} else {
-    mealDivs.forEach(div => {
+  if (filters.length === 0) {
+    mealDivs.forEach((meal) => {
+      meal.style.display = "flex";
+    });
+  } else {
+    mealDivs.forEach((div) => {
       /*Om den inte är tom loopar vi egenom alla divar och kollar
       om något sparat filter stämmer med den aktuella diven och 
       kommer tillbaka sann eller falskt beroende på  */
-      const matchesAtLeastOneFilter = filters.some(filter => div.id.includes(filter));
+      const matchesAtLeastOneFilter = filters.some((filter) =>
+        div.id.includes(filter)
+      );
       /*Om den är true(stämmer överens med minst ett filter) så
       sätter vi den synlig(display:flex) annars sätter vi den 
       osynlig(display:none)*/
@@ -372,14 +384,34 @@ function displayFilteredMeals(filters) {
       }
     });
   }
-};
+}
+//Function för att gömma mobil version filtret
+const btnHide = document.getElementById("btn-hide");
+const asideContainer = document.querySelector(".version-aside-container");
+const btnFilterText = document.getElementById("filter-drop");
+let isHidden = false;
 
+btnHide.addEventListener("click", () => {
+  if (isHidden) {
+    asideContainer.style.transform = "translateY(0rem)";
+    btnHide.style.transform = "rotate(360deg)";
+    // default vy
+  } else {
+    asideContainer.style.transform = "translateY(-25rem)";
+    btnHide.style.transform = "rotate(180deg)";
+  }
+  isHidden = !isHidden; // om ishidden är false blir den true och om ishidden är true blir den false osv.
+});
 
-
-
-
-
-
-
-
- 
+//Funktion för att gömma footern i alla lägen
+let Hidden = false;
+const btnSocials = document.getElementById("social-click-out");
+btnSocials.addEventListener("click", () => {
+  if (Hidden) {
+    document.querySelector(".footer").style.transform = "translateX(0rem)";
+    //default vy
+  } else {
+    document.querySelector(".footer").style.transform = "translateX(-220rem)";
+  }
+  Hidden = !Hidden; // om hidden är false blir den true och om hidden är true blir den false osv.
+});
