@@ -260,8 +260,10 @@ body {
   margin: 40px;
   display: flex;
   flex-wrap: wrap;
+  
   justify-content: space-between;
   padding-bottom: 11rem;
+
 }
 .white-card img {
   /* Bild */
@@ -271,10 +273,11 @@ body {
 }
 .dish-title {
   /* maträtt-namn */
+  position: relative;
   font-size: 23px;
   font-weight: bold;
   padding: 0px;
-  margin: 10px;
+  margin: 15px;
 }
 .dish-price {
   /* pris */
@@ -283,14 +286,35 @@ body {
   font-size: 23px;
   font-weight: bold;
   margin: 10px;
+  
 }
 .dish-description {
   /* maträtt-beskrivning */
   color: rgb(109, 109, 109);
   padding: 0px;
-  margin-left: 1rem;
+  margin: 0px 10px 0px 10px;
 }
+ .gluten-free {
+  display: block;
+  font-size: 15px;
+  padding: 4px;
+  margin: 10px;
+  border-radius: 10px;
+  background: #d4cccc;
+  
+}
+.lactose-free {
+  display: block;
+  align-items: center;
+  font-size: 15px;
+  padding: 4px;
+  margin: 10px;
+  border-radius: 10px; 
+  background: #d4cccc;
+}
+
 /* knappen för att byta språk */
+
 #byta {
   position: inherit;
   right: 0;

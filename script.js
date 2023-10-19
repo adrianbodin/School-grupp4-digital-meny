@@ -203,6 +203,7 @@ function createDishBox(data) {
   gridContainer.appendChild(box); //elementen läggs till i gridContainer
 
   return box;
+
 }
 
 //Byta språk
