@@ -21,7 +21,7 @@ svar från våran funktion innan den körs.
 Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
-
+const foodData2 = await getFoodData();
 //Javascript för att minska headern --Johan
 window.onscroll = function () {
   scrollFunction();
@@ -74,6 +74,7 @@ function scrollFunction() {
 
 //funktion för att sortera matdatan efter pris --Alma
 function sortDishesByPrice(low) {
+  
   foodData.sort((a, b) => {
     //sort metod på foodData array som sorterar elementen med en jämförelsefunktion
     const priceA = parseFloat(a.price.replace(" kr", ""));
@@ -106,7 +107,7 @@ function updateBoxes(data) {
     gridContainer.removeChild(gridContainer.firstChild); //rensa bort tidigare maträttsboxar
   }
 
-  data.forEach((item) => {
+  data.forEach((item) => { 
     const box = createDishBox(item);
     gridContainer.appendChild(box);
   });
@@ -120,7 +121,7 @@ const priceFilterSelect = document.getElementById("price-filter");
 priceFilterSelect.addEventListener("change", () => {
   //lyssnar på ändring som användaren gör på sortera knapp
   const selectOption = priceFilterSelect.value;
-
+  
   if (selectOption === "low") {
     //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
     sortDishesByPrice(true);
@@ -130,6 +131,7 @@ priceFilterSelect.addEventListener("change", () => {
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
   }
+  
 
   updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
 });
@@ -155,7 +157,7 @@ priceFilterSelectMobile.addEventListener("change", () => {
 function createDishBox(data) {
   const box = document.createElement("div"); //vit box
   box.className = "white-card";
-
+  
   //Kollar om måltiden inehåller gluten och lägger isåfall
   //till detta i id
   if (data.gluten === false && data.lactose === false) {
@@ -294,12 +296,9 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("price").textContent = langData["eng"].price;
 
     document.getElementById("category").textContent = langData["eng"].category;
-    document.getElementById("label_vego").innerHTML = langData["eng"].vego;
-    
-    document.getElementById("label_chicken").textContent =
-      langData["eng"].chicken;
-    
-
+    document.getElementById("label_vego").innerHTML = langData["eng"].vego;  
+    document.getElementById("label_chicken").textContent = langData["eng"].chicken;
+  
     document.getElementById("label_pork").textContent = langData["eng"].pork;
     document.getElementById("label_beef").textContent = langData["eng"].meat;
     document.getElementById("label_fish").textContent = langData["eng"].fish;
@@ -320,7 +319,20 @@ document.getElementById("byta").addEventListener("click", () => {
     
     /**För mobil version */
     document.getElementById("reset-button").textContent = langData["eng"].title;
+    document.getElementById("price_m").textContent = langData["eng"].price;
     document.getElementById("label_vego_m").innerHTML = langData["eng"].vego;
+    document.getElementById("label_chicken_m").innerHTML = langData["eng"].chicken;
+    document.getElementById("label_pork_m").textContent = langData["eng"].pork;
+    document.getElementById("label_beef_m").textContent = langData["eng"].meat;
+    document.getElementById("label_fish_m").textContent = langData["eng"].fish;
+    document.getElementById("low-to-high-mobile").textContent =
+      langData["eng"].low_to_high;
+    document.getElementById("high-to-low-mobile").textContent =
+      langData["eng"].high_to_low;
+    document.getElementById("label_gluten_m").textContent =
+      langData["eng"].gluten;
+    document.getElementById("label_lactose_m").textContent =
+      langData["eng"].lactose;
 
     document.getElementById("byta").textContent = "Change to Swedish";
     document.querySelector("aside").classList.remove("swe");
@@ -362,6 +374,16 @@ document.getElementById("byta").addEventListener("click", () => {
 
     /**För mobil versionen */
     document.getElementById("reset-button").textContent = langData["swe"].title;
+    document.getElementById("label_vego_m").innerHTML = langData["swe"].vego;
+    document.getElementById("label_chicken_m").innerHTML = langData["swe"].chicken;
+    document.getElementById("label_pork_m").textContent = langData["swe"].pork;
+    document.getElementById("label_beef_m").textContent = langData["swe"].meat;
+    document.getElementById("label_fish_m").textContent = langData["swe"].fish;
+
+    document.getElementById("low-to-high-mobile").textContent =
+      langData["swe"].low_to_high;
+    document.getElementById("high-to-low-mobile").textContent =
+      langData["swe"].high_to_low;
     
     document.getElementById("byta").textContent = "Byt till Engelska";
     document.querySelector("aside").classList.remove("eng");
@@ -403,30 +425,67 @@ const langData = {
 };
 /**Byta cardsens språk */
 function changeCardLanguage(){
-  let nrOfCards = document.getElementsByClassName("white-card");
-  if(document.querySelector("aside").classList.contains("swe")){
-    for(let i=0; i < nrOfCards.length; i++){
-      nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.en;
-      nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.en;
-      if(nrOfCards[i].querySelector(".gluten-free")){
-        nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfree";
+  let nrOfCards = document.getElementsByClassName("white-card"); //här här den fortfarande sorterad kanske
+
+  if(dropdown1.selectedIndex > 0){
+    /**När sortDishesByPrice aktiveras så sorteras den globala foodData JSON arrayen, vilket leder till att när 
+     * den översätts så hämtar den infon från den sorterade arrayen, dvs att titeln och description ändras inte när 
+     * resetFilters() functionen kallas.
+     * Därför ifall det finns ett värde i dropdownMenyn, vilket visar att den används så översätts den sorterade arrayen
+     * Annars hämtar den data från den osorterade.
+    */
+    if(document.querySelector("aside").classList.contains("swe")){
+      for(let i=0; i < nrOfCards.length; i++){
+        
+        nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.en;
+        nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.en;
+        if(nrOfCards[i].querySelector(".gluten-free")){
+          nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfree";
+        }
+        if(nrOfCards[i].querySelector(".lactose-free")){
+          nrOfCards[i].querySelector(".lactose-free").textContent = "Lactosefree";
+        }
       }
-      if(nrOfCards[i].querySelector(".lactose-free")){
-        nrOfCards[i].querySelector(".lactose-free").textContent = "Lactosefree";
+    }else if(document.querySelector("aside").classList.contains("eng")){
+      for(let i=0; i < nrOfCards.length; i++){
+        nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.swe;
+        nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.swe;
+        if(nrOfCards[i].querySelector(".gluten-free")){
+          nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfri";
+        }
+        if(nrOfCards[i].querySelector(".lactose-free")){
+          nrOfCards[i].querySelector(".lactose-free").textContent = "Laktosfri";
+        }
       }
     }
-  }else if(document.querySelector("aside").classList.contains("eng")){
-    for(let i=0; i < nrOfCards.length; i++){
-      nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.swe;
-      nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.swe;
-      if(nrOfCards[i].querySelector(".gluten-free")){
-        nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfri";
+  }else{
+    /**Om dropdown menyn på pris sorteringen inte har något värde använder vi datan från den andra globala JSON arrayen*/
+    if(document.querySelector("aside").classList.contains("swe")){
+      for(let i=0; i < nrOfCards.length; i++){
+        
+        nrOfCards[i].querySelector(".dish-title").textContent = foodData2[i].dish.en;
+        nrOfCards[i].querySelector(".dish-description").textContent = foodData2[i].description.en;
+        if(nrOfCards[i].querySelector(".gluten-free")){
+          nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfree";
+        }
+        if(nrOfCards[i].querySelector(".lactose-free")){
+          nrOfCards[i].querySelector(".lactose-free").textContent = "Lactosefree";
+        }
       }
-      if(nrOfCards[i].querySelector(".lactose-free")){
-        nrOfCards[i].querySelector(".lactose-free").textContent = "Laktosfri";
+    }else if(document.querySelector("aside").classList.contains("eng")){
+      for(let i=0; i < nrOfCards.length; i++){
+        nrOfCards[i].querySelector(".dish-title").textContent = foodData2[i].dish.swe;
+        nrOfCards[i].querySelector(".dish-description").textContent = foodData2[i].description.swe;
+        if(nrOfCards[i].querySelector(".gluten-free")){
+          nrOfCards[i].querySelector(".gluten-free").textContent = "Glutenfri";
+        }
+        if(nrOfCards[i].querySelector(".lactose-free")){
+          nrOfCards[i].querySelector(".lactose-free").textContent = "Laktosfri";
+        }
       }
     }
   }
+  
 }
 
 //I denna arrayen sparas våra aktiva filter som vi valt
@@ -606,7 +665,7 @@ function setBothDropdownsSelectedIndex(index) {
 }
 
 // Function to reset all filters
-function resetFilters() {
+async function resetFilters() {
   // Uncheck all checkboxes
   allCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
@@ -623,6 +682,7 @@ function resetFilters() {
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild)
   };
+  
   createBoxes();
 }
 
