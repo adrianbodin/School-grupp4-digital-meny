@@ -21,6 +21,7 @@ svar från våran funktion innan den körs.
 Om vi vill använda datan är det bara att manipulera foodData som är en
 array*/
 const foodData = await getFoodData();
+/**foodData2 används för att läsa den orginella datan som inte blivit manipulerad  */
 const foodData2 = await getFoodData();
 //Javascript för att minska headern --Johan
 window.onscroll = function () {
@@ -132,7 +133,6 @@ priceFilterSelect.addEventListener("change", () => {
     gridContainer.removeChild(gridContainer.firstChild);
   }
   
-
   updateBoxes(foodData); //anropar funktion för att uppdatera maträttsboxarna
 });
 
@@ -241,58 +241,22 @@ function createDishBox(data) {
     }
   }
 
-  /*const img = document.createElement("img"); //bild
-  img.src = data.img;
-  img.alt = data.imageDescription;
-  box.appendChild(img);
-
-  const title = document.createElement("div"); //titel
-  title.className = "dish-title";
-  title.textContent = data.dish.swe;
-  box.appendChild(title);
-
-  const price = document.createElement("div"); //pris
-  price.className = "dish-price";
-  price.textContent = data.price;
-  box.appendChild(price);
-
-  const description = document.createElement("div"); //beskrivning
-  description.className = "dish-description";
-  description.textContent = data.description.swe;
-  box.appendChild(description);
-
-  if (data.gluten === false) {
-    const glutenFree = document.createElement("p");
-    glutenFree.className = "gluten-free";
-    glutenFree.textContent = "Glutenfri";
-    box.appendChild(glutenFree);
-  }
-
-  if (data.lactose === false) {
-    const lactoseFree = document.createElement("p");
-    lactoseFree.className = "lactose-free";
-    lactoseFree.textContent = "Laktosfri";
-    box.appendChild(lactoseFree);
-  }*/
-
   gridContainer.appendChild(box); //elementen läggs till i gridContainer
 
   return box;
-
 }
 
 //Byta språk
 document.getElementById("byta").addEventListener("click", () => {
   changeCardLanguage();
+
   if (document.querySelector("aside").classList.contains("swe")) {
     /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
-    /**Byter språk i filter menyn */
+    /**Återställ filters översättning för Desktop versionen */
     document.getElementById("reset-filter").textContent = langData["eng"].title;
     
-    document.getElementById("low-to-high").textContent =
-      langData["eng"].low_to_high;
-    document.getElementById("high-to-low").textContent =
-      langData["eng"].high_to_low;
+    document.getElementById("low-to-high").textContent = langData["eng"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["eng"].high_to_low;
     document.getElementById("price").textContent = langData["eng"].price;
 
     document.getElementById("category").textContent = langData["eng"].category;
@@ -304,19 +268,25 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_fish").textContent = langData["eng"].fish;
 
     document.getElementById("allergy_id").innerHTML = langData["eng"].allergy;
-    document.getElementById("label_gluten").textContent =
-      langData["eng"].gluten;
-    document.getElementById("label_lactose").textContent =
-      langData["eng"].lactose;
+    document.getElementById("label_gluten").textContent =langData["eng"].gluten;
+    document.getElementById("label_lactose").textContent = langData["eng"].lactose;
 
+     /**Översätter footern */
     document.getElementById("social-footer").textContent ="Our social media:"
-    document.getElementById("footer-phone").textContent ="Phone: 123456789";
+    /**Telefon och adress behöver ändras genom att skapa ett paragrah element och sätta String variabeln
+     * i dess .innerHTML så att anchor elementet kan skapas, annars tolkas det som vanlig text
+     * Fax ser likadant ut på både Engelska och svenska så det hoppar jag att översätta
+     */
+    let social_phone = "Phone: <a class='social-links' href=''> 123456789";
+    let phoneParagraph = document.createElement("p");
+    phoneParagraph.innerHTML = social_phone;
+    document.getElementById("footer-phone").innerHTML = phoneParagraph.innerHTML;
 
-    let addressString = "Address: "+ "<br />"+"Campusvärnamogatan"+"<br />"+"52485 Värnamo";
+    let addressString = "Address: <br /><a class='social-links' href=''>Campusvärnamogatan<br />52485 Värnamo</a>";
     let paragraphAddress = document.createElement("p");
     paragraphAddress.innerHTML = addressString;
     document.getElementById("footer-adress").innerHTML = paragraphAddress.innerHTML;
-    
+
     /**För mobil version */
     document.getElementById("reset-button").textContent = langData["eng"].title;
     document.getElementById("price_m").textContent = langData["eng"].price;
@@ -325,6 +295,7 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_pork_m").textContent = langData["eng"].pork;
     document.getElementById("label_beef_m").textContent = langData["eng"].meat;
     document.getElementById("label_fish_m").textContent = langData["eng"].fish;
+
     document.getElementById("low-to-high-mobile").textContent =
       langData["eng"].low_to_high;
     document.getElementById("high-to-low-mobile").textContent =
@@ -339,34 +310,36 @@ document.getElementById("byta").addEventListener("click", () => {
     document.querySelector("aside").classList.add("eng");
   } else if (document.querySelector("aside").classList.contains("eng")) {
 
-    /**För desktop versionen */
+    /** Återställ filters översättning för Desktop versionen */
     document.getElementById("reset-filter").textContent = langData["swe"].title;
     
     document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
-    document.getElementById("high-to-low").textContent =
-      langData["swe"].high_to_low;
+    document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
     document.getElementById("price").textContent = langData["swe"].price;
 
     document.getElementById("category").textContent = langData["swe"].category;
     document.getElementById("label_vego").textContent = langData["swe"].vego;
     
-    document.getElementById("label_chicken").textContent =
-      langData["swe"].chicken;
+    document.getElementById("label_chicken").textContent = langData["swe"].chicken;
 
     document.getElementById("label_pork").textContent = langData["swe"].pork;
     document.getElementById("label_beef").textContent = langData["swe"].meat;
     document.getElementById("label_fish").textContent = langData["swe"].fish;
 
     document.getElementById("allergy_id").textContent = langData["swe"].allergy;
-    document.getElementById("label_gluten").textContent =
-      langData["swe"].gluten;
-    document.getElementById("label_lactose").textContent =
-      langData["swe"].lactose;
+    document.getElementById("label_gluten_m").textContent = langData["swe"].gluten;
+    document.getElementById("label_lactose_m").textContent = langData["swe"].lactose;
+    
 
+      /**Översätter footern */
     document.getElementById("social-footer").textContent ="Våra sociala medier:"
-    document.getElementById("footer-phone").textContent ="Telefon: 123456789";
 
-    let addressString = "Adress: "+ "<br />"+"Campusvärnamogatan"+"<br />"+"52485 Värnamo";
+    let social_phone = "Telefon: <a class='social-links' href=''> 123456789";
+    let phoneParagraph = document.createElement("p");
+    phoneParagraph.innerHTML = social_phone;
+    document.getElementById("footer-phone").innerHTML = phoneParagraph.innerHTML;
+
+    let addressString = "Adress: <br /><a class='social-links' href=''>Campusvärnamogatan<br />52485 Värnamo</a>";
     let paragraphAddress = document.createElement("p");
     paragraphAddress.innerHTML = addressString;
     document.getElementById("footer-adress").innerHTML = paragraphAddress.innerHTML;
@@ -419,8 +392,8 @@ const langData = {
     meat: "Nöt",
     fish: "Fisk",
     allergy: "Allergier",
-    gluten: "Glutenfri",
-    lactose: "Laktosfri",
+    gluten: "Glutenfritt",
+    lactose: "Laktosfritt",
   },
 };
 /**Byta cardsens språk */
@@ -459,7 +432,7 @@ function changeCardLanguage(){
       }
     }
   }else{
-    /**Om dropdown menyn på pris sorteringen inte har något värde använder vi datan från den andra globala JSON arrayen*/
+    
     if(document.querySelector("aside").classList.contains("swe")){
       for(let i=0; i < nrOfCards.length; i++){
         
