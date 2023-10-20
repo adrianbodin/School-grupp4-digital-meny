@@ -108,6 +108,7 @@ function updateBoxes(data) {
 
   data.forEach((item) => {
     const box = createDishBox(item);
+    
     gridContainer.appendChild(box);
   });
   
@@ -120,12 +121,13 @@ const priceFilterSelect = document.getElementById("price-filter");
 priceFilterSelect.addEventListener("change", () => {
   //lyssnar på ändring som användaren gör på sortera knapp
   const selectOption = priceFilterSelect.value;
-
   if (selectOption === "low") {
     //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
     sortDishesByPrice(true);
+    
   } else if (selectOption === "high") {
     sortDishesByPrice(false);
+  
   }
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
@@ -168,7 +170,78 @@ function createDishBox(data) {
     box.id = data.category + "-card";
   }
 
-  const img = document.createElement("img"); //bild
+  //Kollar om Cards ska skrivas på engelesk eller svenska
+  if(document.querySelector("aside").classList.contains("swe")){
+    const img = document.createElement("img"); //bild
+    img.src = data.img;
+    img.alt = data.imageDescription;
+    box.appendChild(img);
+
+    const title = document.createElement("div"); //titel
+    title.className = "dish-title";
+    title.textContent = data.dish.swe;
+    box.appendChild(title);
+
+    const price = document.createElement("div"); //pris
+    price.className = "dish-price";
+    price.textContent = data.price;
+    box.appendChild(price);
+
+    const description = document.createElement("div"); //beskrivning
+    description.className = "dish-description";
+    description.textContent = data.description.swe;
+    box.appendChild(description);
+
+    if (data.gluten === false) {
+      const glutenFree = document.createElement("p");
+      glutenFree.className = "gluten-free";
+      glutenFree.textContent = "Glutenfri";
+      box.appendChild(glutenFree);
+    }
+
+    if (data.lactose === false) {
+      const lactoseFree = document.createElement("p");
+      lactoseFree.className = "lactose-free";
+      lactoseFree.textContent = "Laktosfri";
+      box.appendChild(lactoseFree);
+    }
+  }else if(document.querySelector("aside").classList.contains("eng")){
+    const img = document.createElement("img"); //bild
+    img.src = data.img;
+    img.alt = data.imageDescription;
+    box.appendChild(img);
+
+    const title = document.createElement("div"); //titel
+    title.className = "dish-title";
+    title.textContent = data.dish.en;
+    box.appendChild(title);
+
+    const price = document.createElement("div"); //pris
+    price.className = "dish-price";
+    price.textContent = data.price;
+    box.appendChild(price);
+
+    const description = document.createElement("div"); //beskrivning
+    description.className = "dish-description";
+    description.textContent = data.description.en;
+    box.appendChild(description);
+
+    if (data.gluten === false) {
+      const glutenFree = document.createElement("p");
+      glutenFree.className = "gluten-free";
+      glutenFree.id = "label-gluten";
+      glutenFree.textContent = "Glutenfree";
+      box.appendChild(glutenFree);
+    }
+
+    if (data.lactose === false) {
+      const lactoseFree = document.createElement("p");
+      lactoseFree.className = "lactose-free";
+      lactoseFree.textContent = "Laktosfree";
+      box.appendChild(lactoseFree);
+    }
+  }
+  /*const img = document.createElement("img"); //bild
   img.src = data.img;
   img.alt = data.imageDescription;
   box.appendChild(img);
@@ -200,12 +273,11 @@ function createDishBox(data) {
     lactoseFree.className = "lactose-free";
     lactoseFree.textContent = "Laktosfri";
     box.appendChild(lactoseFree);
-  }
+  }*/
 
   gridContainer.appendChild(box); //elementen läggs till i gridContainer
 
   return box;
-
 }
 
 //Byta språk
@@ -214,11 +286,13 @@ document.getElementById("byta").addEventListener("click", () => {
   if (document.querySelector("aside").classList.contains("swe")) {
     /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
     document.getElementById("reset-filter").textContent = langData["eng"].title;
-    document.getElementById("low-to-high").textContent =
+    document.getElementById("reset-button").textContent = langData["eng"].title;
+    document.getElementById("low-to-high").textContent = 
       langData["eng"].low_to_high;
     document.getElementById("high-to-low").textContent =
       langData["eng"].high_to_low;
     document.getElementById("price").textContent = langData["eng"].price;
+    
 
     document.getElementById("category").textContent = langData["eng"].category;
     document.getElementById("label_vego").innerHTML = langData["eng"].vego;
@@ -230,20 +304,17 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_fish").textContent = langData["eng"].fish;
 
     document.getElementById("allergy_id").innerHTML = langData["eng"].allergy;
-    document.getElementById("label_gluten").textContent =
-      langData["eng"].gluten;
-    document.getElementById("label_lactose").textContent =
-      langData["eng"].lactose;
+    document.getElementById("label-gluten").innerHTML = langData["eng"].gluten;
+    document.getElementById("label_lactose").textContent = langData["eng"].lactose;
 
     document.getElementById("byta").textContent = "Change to Swedish";
     document.querySelector("aside").classList.remove("swe");
     document.querySelector("aside").classList.add("eng");
+
   } else if (document.querySelector("aside").classList.contains("eng")) {
     document.getElementById("reset-filter").textContent = langData["swe"].title;
-    document.getElementById("low-to-high").textContent =
-      langData["swe"].low_to_high;
-    document.getElementById("high-to-low").textContent =
-      langData["swe"].high_to_low;
+    document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
+    document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
     document.getElementById("price").textContent = langData["swe"].price;
 
     document.getElementById("category").textContent = langData["swe"].category;
@@ -256,10 +327,13 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_fish").textContent = langData["swe"].fish;
 
     document.getElementById("allergy_id").textContent = langData["swe"].allergy;
-    document.getElementById("label_gluten").textContent =
+    /*document.getElementById("label_gluten").textContent =
       langData["swe"].gluten;
     document.getElementById("label_lactose").textContent =
-      langData["swe"].lactose;
+      langData["swe"].lactose;*/
+
+    document.getElementsByClassName("gluten-free").textContent = langData["swe"].gluten;
+    document.getElementsByClassName("lactose-free").textContent = langData["swe"].lactose;
 
     document.getElementById("byta").textContent = "Byt till Engelska";
     document.querySelector("aside").classList.remove("eng");
@@ -306,11 +380,13 @@ function changeCardLanguage(){
     for(let i=0; i < nrOfCards.length; i++){
       nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.en;
       nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.en;
+     
     }
   }else if(document.querySelector("aside").classList.contains("eng")){
     for(let i=0; i < nrOfCards.length; i++){
       nrOfCards[i].querySelector(".dish-title").textContent = foodData[i].dish.swe;
       nrOfCards[i].querySelector(".dish-description").textContent = foodData[i].description.swe;
+      
     }
   }
 }
