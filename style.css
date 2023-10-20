@@ -98,10 +98,11 @@
 .version-aside-container {
   display: none;
   position: fixed;
-  top: 0;
   background-color: rgb(235, 227, 227, 0.9);
   width: 100%;
-
+  top: 0;
+  left: 0;
+  right: 0;
   transition: 0.2s;
   padding-top: 17rem;
   border-bottom-left-radius: 13px;
@@ -123,7 +124,8 @@
   border: none;
   outline: none;
   background: transparent;
-  font-size: 45px;
+  font-size: 10px;
+  margin-right: 1rem;
   cursor: pointer;
 }
 /* knapp för att visa och gömma footer */
@@ -131,7 +133,7 @@
   position: fixed;
   top: 12rem;
   right: 3rem;
-  font-size: 20px;
+  font-size: 10px;
   outline: none;
   border-radius: 7px;
   background-color: transparent;
@@ -204,6 +206,9 @@ body {
   margin: 0 0 100px;
   font-family: "Roboto", sans-serif;
   background: #d4cccc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #header {
@@ -262,7 +267,6 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   padding-bottom: 11rem;
-
 }
 .white-card img {
   /* Bild */
@@ -285,7 +289,6 @@ body {
   font-size: 23px;
   font-weight: bold;
   margin: 10px;
-  
 }
 .dish-description {
   /* maträtt-beskrivning */
@@ -293,14 +296,13 @@ body {
   padding: 0px;
   margin: 0px 10px 0px 10px;
 }
- .gluten-free  {
+.gluten-free {
   display: block;
   font-size: 15px;
   padding: 4px;
   margin: 10px;
   border-radius: 10px;
   background: #d4cccc;
-  
 }
 .lactose-free {
   display: block;
@@ -308,14 +310,15 @@ body {
   font-size: 15px;
   padding: 4px;
   margin: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
   background: #d4cccc;
 }
 
 /* knappen för att byta språk */
 
 #byta {
-  position: inherit;
+  position: fixed;
+  top: 0;
   right: 0;
   margin: 2rem;
   width: 200px;
@@ -387,7 +390,7 @@ body {
   .white-card {
     height: 210px;
     width: 270px;
-    padding-bottom: 12.2rem;
+    padding-bottom: 13rem;
   }
   .white-card img {
     width: 270px;
@@ -564,6 +567,10 @@ body {
   }
   .footer {
     flex-direction: column;
+    font-size: 10px;
+  }
+  .social-list {
+    font-size: 7px;
   }
   #logo {
     left: 0.8rem;
@@ -585,7 +592,7 @@ body {
   .white-card {
     width: 285px;
     height: 230px;
-    padding-bottom: 11rem;
+    padding-bottom: 15.5rem;
   }
   .white-card img {
     width: 285px;
