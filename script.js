@@ -110,6 +110,7 @@ function updateBoxes(data) {
 
   data.forEach((item) => { 
     const box = createDishBox(item);
+    
     gridContainer.appendChild(box);
   });
   
@@ -122,12 +123,14 @@ const priceFilterSelect = document.getElementById("price-filter");
 priceFilterSelect.addEventListener("change", () => {
   //lyssnar på ändring som användaren gör på sortera knapp
   const selectOption = priceFilterSelect.value;
-  
+
   if (selectOption === "low") {
     //beroende på val av användaren, anropas sortDishesByPrice funktionen med antingen sant eller falskt.
     sortDishesByPrice(true);
+    
   } else if (selectOption === "high") {
     sortDishesByPrice(false);
+  
   }
   while (gridContainer.firstChild) {
     gridContainer.removeChild(gridContainer.firstChild);
@@ -254,10 +257,19 @@ document.getElementById("byta").addEventListener("click", () => {
     /**Kollar efter id och byter sedan texten från langData beroende på om aside elementet har klassen swe eller eng */
     /**Återställ filters översättning för Desktop versionen */
     document.getElementById("reset-filter").textContent = langData["eng"].title;
+
     
     document.getElementById("low-to-high").textContent = langData["eng"].low_to_high;
     document.getElementById("high-to-low").textContent = langData["eng"].high_to_low;
+
+    document.getElementById("reset-button").textContent = langData["eng"].title;
+    document.getElementById("low-to-high").textContent = 
+      langData["eng"].low_to_high;
+    document.getElementById("high-to-low").textContent =
+      langData["eng"].high_to_low;
+
     document.getElementById("price").textContent = langData["eng"].price;
+    
 
     document.getElementById("category").textContent = langData["eng"].category;
     document.getElementById("label_vego").innerHTML = langData["eng"].vego;  
@@ -308,11 +320,12 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("byta").textContent = "Change to Swedish";
     document.querySelector("aside").classList.remove("swe");
     document.querySelector("aside").classList.add("eng");
+
   } else if (document.querySelector("aside").classList.contains("eng")) {
 
     /** Återställ filters översättning för Desktop versionen */
     document.getElementById("reset-filter").textContent = langData["swe"].title;
-    
+
     document.getElementById("low-to-high").textContent = langData["swe"].low_to_high;
     document.getElementById("high-to-low").textContent = langData["swe"].high_to_low;
     document.getElementById("price").textContent = langData["swe"].price;
@@ -327,6 +340,7 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_fish").textContent = langData["swe"].fish;
 
     document.getElementById("allergy_id").textContent = langData["swe"].allergy;
+
     document.getElementById("label_gluten_m").textContent = langData["swe"].gluten;
     document.getElementById("label_lactose_m").textContent = langData["swe"].lactose;
     
@@ -352,6 +366,11 @@ document.getElementById("byta").addEventListener("click", () => {
     document.getElementById("label_pork_m").textContent = langData["swe"].pork;
     document.getElementById("label_beef_m").textContent = langData["swe"].meat;
     document.getElementById("label_fish_m").textContent = langData["swe"].fish;
+
+    document.getElementById("label_gluten_m").textContent =
+      langData["swe"].gluten;
+    document.getElementById("label_lactose_m").textContent =
+      langData["swe"].lactose;
 
     document.getElementById("low-to-high-mobile").textContent =
       langData["swe"].low_to_high;
